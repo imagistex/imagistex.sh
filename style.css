@@ -1,0 +1,110 @@
+/* imagistex.sh — v1 floor plan
+   enchanted-minimal: serif warmth, mono for the builder's edges,
+   one real mirror (the reflected name). dependency-free. */
+
+:root {
+  --ink:   #1c1722;
+  --paper: #faf5ef;
+  --rose:  #b76e79;
+  --gold:  #c9a45b;
+  --muted: #8a8190;
+  --rule:  #e7ddd2;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --mono:  "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  background-image:
+    radial-gradient(120% 80% at 50% -10%, rgba(183,110,121,0.10), transparent 60%),
+    radial-gradient(90% 60% at 100% 0%, rgba(201,164,91,0.08), transparent 55%);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+main { max-width: 46rem; margin: 0 auto; padding: 5rem 1.5rem 2rem; }
+
+/* ── masthead + its mirror ── */
+.masthead { margin-bottom: 3.5rem; }
+
+.name {
+  position: relative;
+  margin: 0;
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+/* the site's first mirror — the name reflected and fading */
+.name::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  transform: scaleY(-1);
+  background: linear-gradient(to bottom, rgba(28,23,34,0.22), transparent 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  pointer-events: none;
+  user-select: none;
+}
+
+.tagline { margin: 1.4rem 0 0; font-style: italic; }
+.thesis  { margin: 0.6rem 0 0; color: var(--rose); font-size: 1.05rem; }
+
+section { margin: 2.6rem 0; }
+
+h2 {
+  margin: 0 0 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: lowercase;
+  color: var(--gold);
+}
+
+p { margin: 0 0 1rem; }
+
+ul.things, ul.links { list-style: none; margin: 0; padding: 0; }
+ul.things li, ul.links li { padding: 0.55rem 0; border-bottom: 1px solid var(--rule); }
+ul.things li:last-child, ul.links li:last-child { border-bottom: 0; }
+ul.links { font-family: var(--mono); font-size: 0.92rem; }
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rose);
+  transition: color 0.2s, border-color 0.2s;
+}
+a:hover { color: var(--rose); border-color: var(--gold); }
+
+.muted { color: var(--muted); font-size: 0.9em; }
+.soon  { color: var(--gold); font-style: italic; }
+
+footer {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #ece6f0; --paper: #14111a; --muted: #9a90a6; --rule: #2a2435; }
+  .name::after {
+    background: linear-gradient(to bottom, rgba(236,230,240,0.20), transparent 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+}
