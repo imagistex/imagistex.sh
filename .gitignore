@@ -1,0 +1,8 @@
+# Vercel CLI local project linkage
+.vercel
+
+# macOS
+.DS_Store
+
+# Node
+node_modules
