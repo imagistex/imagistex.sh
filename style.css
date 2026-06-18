@@ -89,6 +89,7 @@ a:hover { color: var(--rose); border-color: var(--gold); }
 
 .muted { color: var(--muted); font-size: 0.9em; }
 .soon  { color: var(--gold); font-style: italic; }
+.line-heading { color: var(--rose); font-weight: 500; }}
 
 footer {
   max-width: 46rem;
