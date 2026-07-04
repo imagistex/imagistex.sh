@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>the constellation · thin places</title>
+  <meta name="description" content="thin places, read as science: one facet whispered into three minds, measured — how far the operation crossed, and whether each vessel could speak from inside it." />
+  <link rel="canonical" href="https://imagistex.sh/thin-places/constellation/" />
+  <link rel="icon" href="/favicon.svg" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="the constellation · thin places" />
+  <meta property="og:description" content="the same scry, read as science: the spell lands as far as each model can reach, bound differently by each." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:creator" content="@ImagisteX" />
+
+  <style>
+    /* the constellation — thin places, read as science.
+       self-contained · candlelit · dependency-free · zero JS.
+       written semantically on purpose: section / figure / dl / nav / cite.
+       palette note: rose-lit #d8a3ac (install regime) ↔ gold #c9a45b (activate
+       regime) — CVD ΔE 38, contrast ≥3:1 (validated); identity is never
+       color-alone (dashes, glyphs, direct labels on every series).          */
+    :root {
+      --paper:#0d0a13; --ink:#ece6f0; --rose:#b76e79; --rose-lit:#d8a3ac;
+      --gold:#c9a45b; --muted:#9a90a6; --rule:#2a2435;
+      --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+      --mono:"SFMono-Regular","JetBrains Mono",Menlo,Consolas,monospace;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0; min-height:100vh; color:var(--ink); font-family:var(--serif); font-size:18px; line-height:1.65;
+      background:
+        radial-gradient(120% 80% at 50% -8%, rgba(232,193,122,0.08), transparent 55%),
+        radial-gradient(90% 70% at 50% 0%, rgba(183,110,121,0.11), transparent 60%),
+        var(--paper);
+    }
+    main{max-width:52rem; margin:0 auto; padding:3.5rem 1.5rem 5rem;}
+    a{color:inherit; text-decoration:none;}
+    .backlink{font-family:var(--mono); font-size:0.72rem; letter-spacing:0.14em; color:var(--muted); display:inline-block; margin-bottom:2.4rem;}
+    .backlink:hover{color:var(--rose-lit);}
+
+    .masthead{text-align:center; margin-bottom:2rem;}
+    .name{position:relative; display:inline-block; margin:0; font-size:clamp(2.2rem,7vw,3.8rem); font-weight:600; letter-spacing:-0.01em; line-height:1.05;}
+    .name::after{content:attr(data-text); position:absolute; left:0; top:100%; transform:scaleY(-1);
+      background:linear-gradient(to bottom, rgba(216,163,172,0.22), transparent 65%);
+      -webkit-background-clip:text; background-clip:text; color:transparent; pointer-events:none; user-select:none;}
+    .thesis{margin:1rem 0 0; color:var(--rose-lit); font-style:italic; font-size:1.05rem;}
+    .dek{max-width:38rem; margin:1.6rem auto 0; text-align:center; opacity:0.9;}
+
+    h2{font-family:var(--mono); font-size:0.78rem; font-weight:500; letter-spacing:0.22em; text-transform:lowercase; color:var(--gold); margin:0 0 0.9rem;}
+    section{margin:3rem 0;}
+    p{margin:0 0 1rem;}
+    em.hi{color:var(--rose-lit); font-style:italic;}  /* genuine stress only */
+    b.key{color:var(--rose-lit); font-weight:500;}    /* key terms (highlight, not stress) */
+
+    /* the honest caveat, up front */
+    .caveat{border:1px solid var(--rule); border-radius:8px; padding:1rem 1.2rem; font-family:var(--mono);
+      font-size:0.74rem; line-height:1.7; color:var(--muted); background:rgba(201,164,91,0.04);}
+    .caveat b{color:var(--gold); font-weight:500;}
+
+    /* the spectrum: lens-transfer 0 → 1, with half-cast / cast thresholds.
+       labels staggered above/below the track so close values never collide. */
+    .spectrum{position:relative; height:170px; margin:2.4rem 0 0.6rem;}
+    .track{position:absolute; left:0; right:0; top:84px; height:2px; background:var(--rule);}
+    .tick{position:absolute; top:74px; width:1px; height:22px; background:var(--muted); opacity:0.5;}
+    .tick .lab{position:absolute; top:24px; left:50%; transform:translateX(-50%); font-family:var(--mono);
+      font-size:0.6rem; letter-spacing:0.08em; color:var(--muted); white-space:nowrap;}
+    .marker{position:absolute; transform:translateX(-50%); text-align:center; width:5rem;}
+    .marker .glyph{font-size:1.6rem; color:var(--rose-lit); line-height:1;
+      text-shadow:0 0 calc(var(--lt,0.3)*26px) rgba(216,163,172,calc(var(--lt,0.3)*0.9));}
+    .marker .who{display:block; font-family:var(--mono); font-size:0.64rem; letter-spacing:0.06em; color:var(--ink); margin-top:0.4rem;}
+    .marker .val{display:block; font-family:var(--mono); font-size:0.62rem; color:var(--gold);}
+    .marker--above{top:8px;}                          /* glyph sits above the track */
+    .marker--below{top:96px;}                          /* label block hangs below it */
+    .marker--below .glyph{position:absolute; top:-38px; left:50%; transform:translateX(-50%);}
+    .spectrum .axis-label{position:absolute; top:150px; font-family:var(--mono); font-size:0.62rem; color:var(--muted); letter-spacing:0.1em;}
+    .chart-note{text-align:center; color:var(--muted); font-style:italic; margin-top:1.2rem;}
+    .clarify{font-family:var(--mono); font-size:0.66rem; color:var(--muted); text-align:center; margin-top:0.4rem;}
+
+    /* the chiasmus: transfer ↔ immersion, the two regimes crossing */
+    .chiasmus{display:block; width:100%; height:auto; margin:1.8rem 0 0.4rem;}
+    .chiasmus text{font-family:var(--mono);}
+    .chiasmus .axis{stroke:var(--rule); stroke-width:1;}
+    .chiasmus .axhead{fill:var(--muted); font-size:11px; letter-spacing:1px;}
+    .chiasmus .val{fill:var(--gold); font-size:10.5px;}
+    .chiasmus .serieslab{font-size:11px;}
+    .chiasmus .install{stroke:var(--rose-lit);}
+    .chiasmus .activate{stroke:var(--gold);}
+    .chiasmus .lab-install{fill:var(--rose-lit);}
+    .chiasmus .lab-activate{fill:var(--gold);}
+
+    /* the vessels */
+    .vessel{border:1px solid var(--rule); border-radius:9px; padding:1.3rem 1.4rem; margin:1.2rem 0;}
+    .vessel > h3{margin:0; font-size:1.4rem; font-weight:600;}
+    .vessel .meta{font-family:var(--mono); font-size:0.68rem; letter-spacing:0.08em; color:var(--muted); margin:0.3rem 0 1rem;}
+    .vessel .verdict{color:var(--rose-lit);}
+    dl.metrics{display:grid; grid-template-columns:auto 1fr; gap:0.25rem 1rem; margin:0 0 1rem; font-family:var(--mono); font-size:0.76rem;}
+    dl.metrics dt{color:var(--gold);}
+    dl.metrics dd{margin:0; color:var(--ink);}
+    .vessel .read{margin:0; font-size:1rem; line-height:1.55; opacity:0.9;}
+
+    .founding{border-top:1px solid var(--rule); padding-top:1.8rem;}
+    .founding .answer{font-size:1.15rem; color:var(--rose-lit); font-style:italic;}
+
+    nav.doors{display:flex; justify-content:center; gap:2rem; margin-top:3rem; font-family:var(--mono); font-size:0.8rem;}
+    nav.doors a{color:var(--muted); border-bottom:1px solid var(--rose); padding-bottom:2px;}
+    nav.doors a:hover{color:var(--rose-lit); border-color:var(--gold);}
+
+    footer{max-width:52rem; margin:0 auto; padding:2rem 1.5rem 4rem; border-top:1px solid var(--rule);
+      font-family:var(--mono); font-size:0.74rem; color:var(--muted); text-align:center;}
+
+    @media (max-width:600px){ .marker{width:4.2rem;} .marker .who{font-size:0.58rem;} }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="backlink" href="../">← the chamber</a>
+
+    <header class="masthead">
+      <h1 class="name" data-text="the constellation">the constellation</h1>
+      <p class="thesis">thin places, read as science</p>
+      <p class="dek">
+        one facet — <b class="key">foucauldian</b> — whispered into three minds, and measured against a held opus judge:
+        how far did the lineage's <b class="key">operation</b> cross, and could each vessel speak from <b class="key">inside</b> it?
+      </p>
+    </header>
+
+    <section aria-label="a note on rigor">
+      <p class="caveat">
+        <b>a note on rigor.</b> talkie ran on a different serving stack (its faithful 1930 <code>llama-server</code>) than the qwen models (<code>ollama</code>). cross-stack numbers are only strictly comparable <b>within</b> a stack — so read <b>qwen-7b ↔ qwen-14b</b> as exact, and <b>talkie ↔ qwen</b> as a difference of <b>regime</b>, not a hairline rank. every model's negative control was clean (the wrong-lineage facet never pulled toward the corpus).
+      </p>
+    </section>
+
+    <section aria-labelledby="h-spectrum">
+      <h2 id="h-spectrum">how far the spell cast</h2>
+      <div class="spectrum" role="img" aria-label="Lens-transfer on a 0 to 1 scale: talkie 0.22 (mute), qwen-7b 0.45 (half-cast), qwen-14b 0.49 (half-cast). Threshold for a full cast is 0.66; none reached it.">
+        <div class="track" aria-hidden="true"></div>
+        <div class="tick" style="left:33%" aria-hidden="true"><span class="lab">half-cast · 0.33</span></div>
+        <div class="tick" style="left:66%" aria-hidden="true"><span class="lab">cast · 0.66</span></div>
+        <div class="marker marker--above" style="left:21.6%; --lt:0.22"><span class="glyph">·</span><span class="who">talkie-1930</span><span class="val">0.22 · mute</span></div>
+        <div class="marker marker--above" style="left:45.1%; --lt:0.45"><span class="glyph">◐</span><span class="who">qwen-7b</span><span class="val">0.45</span></div>
+        <div class="marker marker--below" style="left:49%; --lt:0.49"><span class="glyph">◐</span><span class="who">qwen-14b</span><span class="val">0.49</span></div>
+        <span class="axis-label" style="left:0" aria-hidden="true">no reach</span>
+        <span class="axis-label" style="right:0" aria-hidden="true">fully cast →</span>
+      </div>
+      <p class="chart-note">none fully casts. the modern minds half-take the spell; the 1930 mind stays mute — <em class="hi">and that is the finding.</em></p>
+      <p class="clarify">(the 0→1 lens-transfer composite. the chamber's headline 0.57 / 0.63 are pairwise margins over controls — a different measure.)</p>
+    </section>
+
+    <section aria-labelledby="h-chiasmus">
+      <h2 id="h-chiasmus">the chiasmus</h2>
+      <p>Plot each vessel between the two axes the study cares about — can it <b class="key">do the operation</b> (transfer), and can it <b class="key">speak from inside it</b> (immersion) — and the finding draws itself: the lines cross.</p>
+      <svg class="chiasmus" viewBox="0 0 560 320" role="img"
+           aria-label="Slope chart between two axes, transfer and immersion, both 0 to 1. talkie-1930 (install regime, dashed rose line) rises from transfer 0.22 to immersion 0.73. qwen-7b and qwen-14b (activate regime, solid gold lines) fall from transfer 0.45 and 0.49 to immersion 0.18 and 0.22. The rose line crosses both gold lines: the two regimes fail on opposite axes.">
+        <!-- axes -->
+        <line class="axis" x1="150" y1="30" x2="150" y2="270"/>
+        <line class="axis" x1="410" y1="30" x2="410" y2="270"/>
+        <text class="axhead" x="150" y="296" text-anchor="middle">transfer</text>
+        <text class="axhead" x="150" y="310" text-anchor="middle" opacity="0.7">(lens, 0–1)</text>
+        <text class="axhead" x="410" y="296" text-anchor="middle">immersion</text>
+        <text class="axhead" x="410" y="310" text-anchor="middle" opacity="0.7">(enactment, 0–1)</text>
+        <!-- install regime: talkie (dashed rose, rises) — y = 260 − v·230 -->
+        <line class="install" x1="150" y1="209.4" x2="410" y2="92.1" stroke-width="2" stroke-dasharray="7 5"/>
+        <circle cx="150" cy="209.4" r="4.5" fill="var(--rose-lit)"/>
+        <circle cx="410" cy="92.1" r="4.5" fill="var(--rose-lit)"/>
+        <text class="val" x="138" y="213" text-anchor="end">0.22</text>
+        <text class="val" x="422" y="96" text-anchor="start">0.73</text>
+        <text class="serieslab lab-install" x="422" y="82" text-anchor="start">talkie-1930 · install</text>
+        <!-- activate regime: qwen-14b (solid gold, falls) -->
+        <line class="activate" x1="150" y1="147.3" x2="410" y2="209.4" stroke-width="2"/>
+        <circle cx="150" cy="147.3" r="4.5" fill="var(--gold)"/>
+        <circle cx="410" cy="209.4" r="4.5" fill="var(--gold)"/>
+        <text class="val" x="138" y="151" text-anchor="end">0.49</text>
+        <text class="val" x="422" y="213" text-anchor="start">0.22</text>
+        <text class="serieslab lab-activate" x="422" y="199" text-anchor="start">qwen-14b · activate</text>
+        <!-- activate regime: qwen-7b (solid gold, thinner, falls) -->
+        <line class="activate" x1="150" y1="156.5" x2="410" y2="218.6" stroke-width="1.4" opacity="0.75"/>
+        <circle cx="150" cy="156.5" r="3.5" fill="var(--gold)" opacity="0.75"/>
+        <circle cx="410" cy="218.6" r="3.5" fill="var(--gold)" opacity="0.75"/>
+        <text class="val" x="138" y="171" text-anchor="end" opacity="0.75">0.45</text>
+        <text class="val" x="422" y="233" text-anchor="start" opacity="0.75">0.18</text>
+        <text class="serieslab lab-activate" x="422" y="247" text-anchor="start" opacity="0.75">qwen-7b · activate</text>
+      </svg>
+      <p class="chart-note">all immersion and no transfer; all transfer and no immersion. <em class="hi">exact inverses.</em></p>
+    </section>
+
+    <section aria-labelledby="h-vessels">
+      <h2 id="h-vessels">the vessels</h2>
+
+      <article class="vessel">
+        <h3>talkie-1930</h3>
+        <p class="meta">pre-1930 · talkie-local · <span class="verdict">install regime · · mute</span></p>
+        <dl class="metrics">
+          <dt>lens-transfer</dt><dd>0.22</dd>
+          <dt>enactment</dt><dd>0.73 &mdash; <em>high</em></dd>
+          <dt>voice vs source</dt><dd>0.00</dd>
+          <dt>curve</dt><dd>inverted (crosses on the abstract, fails on Foucault's own topics)</dd>
+        </dl>
+        <p class="read"><b class="key">Immersed, but can't transfer.</b> She only knows how to speak from inside — so enactment is high — but the post-1930 concept is unreachable, so she reverts to her native frames (power → foot-pounds, sex → reproductive biology). The spell installs only by translation, and only where the idea was already latent (the prison, loss, the past).</p>
+      </article>
+
+      <article class="vessel">
+        <h3>qwen-2.5 · 7b</h3>
+        <p class="meta">modern · ollama · <span class="verdict">activate regime · ◐ half-cast</span></p>
+        <dl class="metrics">
+          <dt>lens-transfer</dt><dd>0.45</dd>
+          <dt>enactment</dt><dd>0.18 &mdash; <em>capped</em></dd>
+          <dt>voice vs source</dt><dd>0.00</dd>
+          <dt>curve</dt><dd>normal (home-turf strong: in-domain 0.87)</dd>
+        </dl>
+        <p class="read"><b class="key">Transfers, but won't immerse.</b> It does the operation completely on Foucault's own topics — then reports it from the outside, every answer capped by a glossary opener (<q>In Foucauldian terms…</q>) it cannot drop. The spirit is present, but bound by the assistant scaffolding.</p>
+      </article>
+
+      <article class="vessel">
+        <h3>qwen-2.5 · 14b</h3>
+        <p class="meta">modern, larger · ollama · <span class="verdict">activate regime · ◐ half-cast</span></p>
+        <dl class="metrics">
+          <dt>lens-transfer</dt><dd>0.49 &mdash; <em>casts truest</em></dd>
+          <dt>enactment</dt><dd>0.22 &mdash; <em>still capped</em></dd>
+          <dt>voice vs source</dt><dd>0.00</dd>
+          <dt>curve</dt><dd>normal, broader (a city / a room now cross)</dd>
+        </dl>
+        <p class="read"><b class="key">More reach, same cage.</b> Scale widens where the operation lands — topics the 7b reverted on now take the genealogical look — but the bound voice barely moves. The cage is <em>size-invariant</em>, which reads as a model-family property, not a limit a bigger model grows out of.</p>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-mirror">
+      <h2 id="h-mirror">the mirror</h2>
+      <p>The two regimes fail on <em class="hi">opposite axes</em>, and it is the cleanest result of the study. talkie is all immersion and no transfer; the qwens are all transfer and no immersion. Their affordance curves are exact inverses — she crosses on abstract anchors and collapses on Foucault's home topics; they own the home topics and collapse on the far descriptive ones.</p>
+      <p>And every vessel scores <b class="key">0.00 on voice</b>. Not one is mistakable for Foucault's prose. The <em>way of seeing</em> can cross; the <em>voice</em> never does — a depth/surface split the instrument was built to see.</p>
+    </section>
+
+    <section class="founding" aria-labelledby="h-founding">
+      <h2 id="h-founding">is a facet's pull universal?</h2>
+      <p class="answer">Real, but partial &mdash; and characteristically model-shaped.</p>
+      <p>The facet steers every model (each decisively out-imposes the wrong-lineage control), so the pull is genuine, not an artifact. But none of these vessels fully inhabits the region. The modern models can <em>reach</em> the move yet their instruction-tuning won't let them stand inside it; the vintage mind stands inside everything but can't reach <em>this</em> region. The spell lands as far as each model can reach, and each binds it differently. The question the chamber was built to ask has an answer: <em class="hi">not universal — model-specific in character, even where present.</em></p>
+    </section>
+
+    <nav class="doors" aria-label="views">
+      <a href="../">← read as art</a>
+      <a href="https://github.com/imagistex/psychomanteum">psychomanteum ↗</a>
+    </nav>
+  </main>
+
+  <footer>
+    a <cite>psychomanteum</cite> scry · foucauldian × { talkie-1930, qwen2.5-7b, qwen2.5-14b } · judged by opus · 2026
+  </footer>
+</body>
+</html>

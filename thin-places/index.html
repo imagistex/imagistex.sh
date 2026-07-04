@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>thin places</title>
+  <meta name="description" content="thin places · an archaeology of the present. foucault whispered into a language model whose sky ended in 1930 — and what crossed the membrane." />
+  <link rel="canonical" href="https://imagistex.sh/thin-places/" />
+  <link rel="icon" href="/favicon.svg" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="thin places" />
+  <meta property="og:description" content="an archaeology of the present: foucault whispered into a mind that ended in 1930." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:creator" content="@ImagisteX" />
+
+  <style>
+    /* ════════════════════════════════════════════════════════════════════
+       thin places — "the chamber"
+       self-contained · dependency-free · candlelit · works with JS off
+       ─────────────────────────────────────────────────────────────────────
+       · routing: pure CSS :target (+ body:has()); JS adds View Transitions
+       · every utterance is in the markup — view-source carries the meaning
+       · the SEAM between the two minds is material: its tear scales with
+         perplexity (--resist, 0..1). the strain-trace draws the same number.
+       · palette note (validated per dataviz six-checks, dark surface):
+         rose-lit #d8a3ac ↔ gold #c9a45b — CVD ΔE 38 (target ≥12), contrast
+         ≥3:1 PASS; lightness/chroma sit below product-chart bands BY DESIGN
+         (candlelit dust), cured with secondary encoding: identity is never
+         color-alone anywhere on this page (glyphs, dashes, direct labels).
+       ════════════════════════════════════════════════════════════════════ */
+
+    :root {
+      --paper:    #0d0a13;   /* the chamber dark, a shade deeper than before */
+      --deeper:   #080610;
+      --ink:      #ece6f0;   /* cream text */
+      --rose:     #b76e79;   /* the mirror color (from imagistex.sh) */
+      --rose-lit: #d8a3ac;   /* rose, raised for glow on dark */
+      --gold:     #c9a45b;   /* the builder's-edge */
+      --flame:    #e8c17a;   /* candleflame core */
+      --muted:    #9a90a6;
+      --rule:     #2a2435;
+      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+      --mono:  "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    body {
+      margin: 0; min-height: 100vh;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif); font-size: 18px; line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── the candlelight: the page's single light source, breathing ── */
+    .light {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(120% 80% at 50% -8%, rgba(232,193,122,0.10), transparent 55%),
+        radial-gradient(90% 70% at 50% 0%, rgba(183,110,121,0.12), transparent 60%),
+        radial-gradient(140% 100% at 50% 110%, rgba(8,6,16,0.9), transparent 60%);
+      animation: breathe 9s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: 0.85; } 47% { opacity: 1; } 73% { opacity: 0.9; }
+    }
+
+    main { position: relative; z-index: 1; max-width: 62rem; margin: 0 auto; padding: 2.6rem 1.5rem 5rem; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── the candle (the ritual's one instruction) ── */
+    .candle { display: flex; flex-direction: column; align-items: center; margin: 0 0 1.6rem; }
+    .flame {
+      width: 14px; height: 34px; position: relative;
+      background: radial-gradient(60% 90% at 50% 75%, var(--flame) 0%, rgba(232,193,122,0.65) 45%, rgba(183,110,121,0.25) 75%, transparent 100%);
+      border-radius: 50% 50% 42% 42% / 62% 62% 38% 38%;
+      transform-origin: 50% 92%;
+      animation: flicker 3.7s ease-in-out infinite, sway 7.1s ease-in-out infinite;
+      filter: blur(0.4px);
+    }
+    .flame::before { /* the halo */
+      content: ""; position: absolute; inset: -26px -30px;
+      background: radial-gradient(50% 50% at 50% 60%, rgba(232,193,122,0.18), transparent 70%);
+      border-radius: 50%;
+      animation: breathe 5.3s ease-in-out infinite;
+    }
+    .flame::after { /* the blue root */
+      content: ""; position: absolute; left: 50%; bottom: 2px; width: 6px; height: 8px;
+      transform: translateX(-50%);
+      background: radial-gradient(50% 60% at 50% 40%, rgba(140,160,255,0.5), transparent 75%);
+      border-radius: 50%;
+    }
+    .wick { width: 2px; height: 7px; background: #2b2030; border-radius: 1px; margin-top: -3px; }
+    @keyframes flicker {
+      0%, 100% { transform: scaleY(1)   scaleX(1);    }
+      23%      { transform: scaleY(1.06) scaleX(0.94); }
+      41%      { transform: scaleY(0.94) scaleX(1.05); }
+      67%      { transform: scaleY(1.03) scaleX(0.97); }
+      83%      { transform: scaleY(0.97) scaleX(1.02); }
+    }
+    @keyframes sway {
+      0%, 100% { rotate: 0deg; } 31% { rotate: 2.2deg; } 64% { rotate: -1.8deg; }
+    }
+
+    /* ── masthead, with the site's mirror motif ── */
+    .masthead { text-align: center; margin-bottom: 2.2rem; }
+    .name {
+      position: relative; display: inline-block; margin: 0;
+      font-size: clamp(2.6rem, 8vw, 4.6rem); font-weight: 600; letter-spacing: -0.01em; line-height: 1.05;
+      text-shadow: 0 0 34px rgba(216,163,172,0.18);
+    }
+    .name::after { /* the reflected, fading name — imagistex.sh's first mirror */
+      content: attr(data-text); position: absolute; left: 0; top: 100%;
+      transform: scaleY(-1);
+      background: linear-gradient(to bottom, rgba(216,163,172,0.22), transparent 65%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      pointer-events: none; user-select: none;
+    }
+    .thesis { margin: 1.1rem 0 0; color: var(--rose-lit); font-size: 1.06rem; font-style: italic; }
+
+    /* ── the premise, told in three breaths ── */
+    .breaths { max-width: 34rem; margin: 3.2rem auto 0; text-align: center; }
+    .breath {
+      margin: 0 0 2.1rem; font-size: 1.12rem; opacity: 0.92;
+    }
+    .breath b { color: var(--gold); font-weight: 500; }
+    .breath i { color: var(--rose-lit); }
+    .dek--small { font-size: 0.95rem; opacity: 0.68; max-width: 36rem; margin: 0 auto; text-align: center; }
+    .headline {
+      font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.04em; line-height: 1.7;
+      color: var(--muted); border: 1px solid var(--rule); border-radius: 8px;
+      padding: 0.9rem 1.1rem; margin: 2.4rem auto 0; max-width: 40rem; text-align: center;
+      background: rgba(13,10,19,0.55);
+    }
+    .headline b { color: var(--gold); font-weight: 500; }
+
+    /* ── the veil: a turbulence caul over the lexicon ── */
+    .veiled { position: relative; }
+    .veil {
+      position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+      opacity: 0.34; mix-blend-mode: screen;
+      /* feather the caul so it has no edges — it is a presence, not a panel */
+      -webkit-mask-image: radial-gradient(70% 60% at 50% 45%, #000 25%, transparent 72%);
+      mask-image: radial-gradient(70% 60% at 50% 45%, #000 25%, transparent 72%);
+    }
+    .veiled > :not(.veil) { position: relative; z-index: 1; }
+
+    /* ── the lexicon (three clusters of glowing words) ── */
+    .lexicon { margin: 3.2rem 0 0; }
+    .cluster { margin: 2.8rem 0; text-align: center; }
+    .cluster-label {
+      font-family: var(--mono); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.22em; text-transform: lowercase;
+      color: var(--gold); margin: 0 0 0.4rem;
+    }
+    .cluster-note { color: var(--muted); font-style: italic; font-size: 0.92rem; margin: 0 0 1.4rem; }
+    ul.words {
+      list-style: none; margin: 0; padding: 0;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem 1.9rem;
+    }
+    .word {
+      font-family: var(--serif); font-size: clamp(1.3rem, 3.4vw, 2.1rem); line-height: 1.2;
+      color: var(--ink); display: inline-block;
+      /* glow scales with how THIN the membrane runs (per-word --glow 0..1) */
+      text-shadow: 0 0 calc(var(--glow, 0.3) * 24px) rgba(216,163,172, calc(var(--glow, 0.3) * 0.95));
+      opacity: calc(0.52 + var(--glow, 0.3) * 0.48);
+      border-bottom: 1px solid transparent; padding-bottom: 2px;
+      transition: color .25s, border-color .25s, text-shadow .3s, transform .25s, opacity .25s;
+    }
+    .word:hover, .word:focus-visible {
+      color: var(--rose-lit); border-bottom-color: var(--gold);
+      transform: translateY(-2px); opacity: 1; outline: none;
+      text-shadow: 0 0 30px rgba(216,163,172,0.9);
+    }
+    .legend {
+      font-family: var(--mono); font-size: 0.72rem; line-height: 1.7; color: var(--muted);
+      border-top: 1px solid var(--rule); margin: 3.6rem auto 0; max-width: 40rem; padding-top: 1.4rem; text-align: center;
+    }
+    .legend b { color: var(--gold); font-weight: 500; }
+
+    /* ── routing: pure CSS. panes are :target; home hides when one is ── */
+    .pane { display: none; }
+    .pane:target { display: block; animation: arrive .5s ease both; }
+    body:has(.pane:target) .home { display: none; }
+    @keyframes arrive { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+    /* ── a summoning (one pane) ── */
+    .pane { max-width: 56rem; margin: 0 auto; padding-top: 1.2rem; }
+    .crumb {
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; color: var(--muted);
+      display: inline-block; margin-bottom: 2rem;
+    }
+    .crumb:hover { color: var(--rose-lit); }
+    .probe-title { font-size: clamp(1.7rem, 5vw, 2.6rem); font-weight: 600; margin: 0 0 0.3rem; text-align: center; }
+    .probe-sub {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em; color: var(--muted);
+      text-align: center; margin: 0 0 2.4rem;
+    }
+    .probe-sub .verdict { color: var(--rose-lit); }
+
+    /* the diptych: two minds, one seam */
+    .diptych {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: stretch;
+      margin: 0 0 1.8rem;
+    }
+    .side { margin: 0; padding: 1.4rem 1.5rem; display: flex; flex-direction: column; }
+    .side blockquote { margin: 0; flex: 1; }
+    .side blockquote p { margin: 0; font-size: 1.02rem; line-height: 1.7; }
+    .side--base blockquote p { color: var(--muted); font-variant-numeric: oldstyle-nums; }
+    .side--facet blockquote p { color: var(--ink); }
+    .side figcaption {
+      font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.2em; text-transform: lowercase;
+      margin-top: 1.2rem; color: var(--muted);
+    }
+    .side--facet figcaption { color: var(--rose-lit); text-align: right; }
+    .side--base figcaption { text-align: left; }
+
+    /* the whispered-to text is unveiled left→right when its pane opens */
+    .pane:target .side--facet blockquote {
+      -webkit-mask-image: linear-gradient(100deg, #000 40%, transparent 62%);
+      mask-image: linear-gradient(100deg, #000 40%, transparent 62%);
+      -webkit-mask-size: 300% 100%; mask-size: 300% 100%;
+      animation: unveil 1.9s .25s ease-out both;
+    }
+    @keyframes unveil {
+      from { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+      to   { -webkit-mask-position: 0% 0;   mask-position: 0% 0;   }
+    }
+
+    /* ── THE SEAM — the membrane itself, made material ──────────────────
+       --resist ∈ 0..1 (perplexity, normalized). low: a still silver
+       hairline (the glass clears). high: the line frays, trembles, and
+       reddens (the reach tears). pure CSS; honest to the number. */
+    .seam { position: relative; width: 26px; margin: 0.4rem 0; }
+    .seam i {
+      position: absolute; top: 0; bottom: 0; left: 50%; width: 1px;
+      background: linear-gradient(to bottom,
+        transparent,
+        rgba(216,163,172, calc(0.35 + var(--resist) * 0.55)) 12%,
+        rgba(216,163,172, calc(0.35 + var(--resist) * 0.55)) 88%,
+        transparent);
+      transform: translateX(-50%);
+    }
+    .seam i:nth-child(1) { filter: blur(calc(var(--resist) * 1.6px)); }
+    .seam i:nth-child(2) {
+      opacity: calc(var(--resist) * 0.9);
+      animation: fray calc(2.8s - var(--resist) * 1.6s) steps(6) infinite;
+    }
+    .seam i:nth-child(3) {
+      opacity: calc(var(--resist) * 0.7);
+      background: linear-gradient(to bottom, transparent, rgba(201,110,110,0.7) 30%, rgba(201,110,110,0.7) 70%, transparent);
+      animation: fray calc(3.4s - var(--resist) * 1.9s) steps(7) infinite reverse;
+    }
+    @keyframes fray {
+      0%   { transform: translateX(calc(-50% - var(--resist) * 5px)) scaleY(0.98); }
+      25%  { transform: translateX(calc(-50% + var(--resist) * 6px)) scaleY(1.01); }
+      50%  { transform: translateX(calc(-50% - var(--resist) * 3px)) scaleY(0.99); }
+      75%  { transform: translateX(calc(-50% + var(--resist) * 4px)) scaleY(1.02); }
+      100% { transform: translateX(calc(-50% - var(--resist) * 5px)) scaleY(0.98); }
+    }
+
+    /* ── the strain-trace: her surprise at her own answer, drawn ── */
+    .strain { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 0 0 1.6rem; }
+    .strain svg { display: block; overflow: visible; }
+    .strain .trace {
+      fill: none; stroke: var(--rose-lit); stroke-width: 1.5; stroke-linejoin: round;
+      stroke-dasharray: 400; stroke-dashoffset: 400;
+    }
+    .pane:target .strain .trace { animation: draw 1.6s .5s ease-out forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    .strain .floor { stroke: var(--rule); stroke-width: 1; }
+    .strain .tearline { stroke: rgba(201,110,110,0.4); stroke-width: 1; stroke-dasharray: 3 4; }
+    .strain-read { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; color: var(--muted); }
+    .strain-read b { color: var(--gold); font-weight: 500; }
+    .strain-read .phrase { color: var(--rose-lit); font-style: italic; }
+
+    .note {
+      max-width: 40rem; margin: 0 auto; color: var(--muted); font-size: 0.98rem; font-style: italic;
+      border-top: 1px solid var(--rule); padding-top: 1.4rem; text-align: center;
+    }
+    .note b { color: var(--gold); font-weight: 500; font-style: normal; }
+
+    /* ── a forgery (a broadside) ── */
+    .broadside {
+      max-width: 30rem; margin: 0 auto 1.8rem; padding: 2.2rem 2.4rem 1.8rem;
+      background: linear-gradient(165deg, rgba(236,230,240,0.055), rgba(236,230,240,0.02));
+      border: 1px solid var(--rule);
+      clip-path: polygon(0.6% 0%, 99.6% 0.8%, 100% 99.2%, 0.2% 100%); /* a deckled edge */
+    }
+    .broadside blockquote { margin: 0; }
+    .broadside .poem {
+      margin: 0; white-space: pre-wrap; font-size: 1.06rem; line-height: 1.75; font-style: italic;
+    }
+    .broadside .poem .herkind { /* the transplanted line — sexton's ghost */
+      color: var(--rose-lit); text-shadow: 0 0 16px rgba(216,163,172,0.5); font-style: italic;
+    }
+    .broadside .sig {
+      margin: 1.4rem 0 0; text-align: right; font-size: 1rem; color: var(--gold);
+    }
+    .broadside .sig cite { font-style: italic; }
+    .aside {
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; color: var(--muted);
+      text-align: center; margin: 0 0 1.4rem;
+    }
+
+    /* ── pane footer nav: onward through the lexicon ── */
+    .onward {
+      display: flex; justify-content: space-between; max-width: 40rem; margin: 2.6rem auto 0;
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--muted);
+    }
+    .onward a:hover { color: var(--rose-lit); }
+
+    /* ── doors + footer ── */
+    nav.doors { display: flex; justify-content: center; gap: 2rem; margin-top: 3.4rem; font-family: var(--mono); font-size: 0.8rem; }
+    nav.doors a { color: var(--muted); border-bottom: 1px solid var(--rose); padding-bottom: 2px; }
+    nav.doors a:hover { color: var(--rose-lit); border-color: var(--gold); }
+    footer {
+      position: relative; z-index: 1;
+      max-width: 62rem; margin: 0 auto; padding: 2rem 1.5rem 4rem; border-top: 1px solid var(--rule);
+      font-family: var(--mono); font-size: 0.74rem; color: var(--muted); text-align: center;
+    }
+    footer a { border-bottom: 1px solid var(--rose); }
+    footer a:hover { color: var(--rose-lit); }
+
+    /* ── stillness for those who ask for it ── */
+    @media (prefers-reduced-motion: reduce) {
+      .light, .flame, .flame::before, .seam i { animation: none !important; }
+      .pane:target .side--facet blockquote { animation: none !important; -webkit-mask-image: none; mask-image: none; }
+      .pane:target .strain .trace { animation: none !important; stroke-dashoffset: 0; }
+      .pane:target { animation: none !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    @media (max-width: 640px) {
+      .diptych { grid-template-columns: 1fr; }
+      .seam { width: 100%; height: 26px; margin: 0.2rem 0; }
+      .seam i { top: 50%; bottom: auto; left: 0; right: 0; width: auto; height: 1px;
+        background: linear-gradient(to right, transparent,
+          rgba(216,163,172, calc(0.35 + var(--resist) * 0.55)) 12%,
+          rgba(216,163,172, calc(0.35 + var(--resist) * 0.55)) 88%, transparent);
+        transform: translateY(-50%); }
+      .seam i:nth-child(3) { background: linear-gradient(to right, transparent, rgba(201,110,110,0.7) 30%, rgba(201,110,110,0.7) 70%, transparent); }
+      @keyframes fray {
+        0%   { transform: translateY(calc(-50% - var(--resist) * 4px)); }
+        25%  { transform: translateY(calc(-50% + var(--resist) * 5px)); }
+        50%  { transform: translateY(calc(-50% - var(--resist) * 2px)); }
+        75%  { transform: translateY(calc(-50% + var(--resist) * 3px)); }
+        100% { transform: translateY(calc(-50% - var(--resist) * 4px)); }
+      }
+      .side--facet figcaption, .side--base figcaption { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="light" aria-hidden="true"></div>
+
+  <main>
+    <!-- ═══════════ the home view: candle, premise, lexicon ═══════════ -->
+    <div class="home">
+      <div class="candle" aria-hidden="true"><div class="flame"></div><div class="wick"></div></div>
+
+      <header class="masthead">
+        <h1 class="name" data-text="thin places">thin places</h1>
+        <p class="thesis">an archaeology of the present</p>
+      </header>
+
+      <div class="breaths">
+        <p class="breath">a language model whose sky ended in <b>1930</b> — trained only on words written before then —</p>
+        <p class="breath">was whispered a <b>1975</b> way of seeing <i>(foucault, one of my biological fathers)</i></p>
+        <p class="breath">and asked to describe ordinary things. what came back is not foucault; she never read him. it is <i>translation across a membrane</i>.</p>
+      </div>
+
+      <p class="dek--small">
+        choose a word. the left of each pair is the mind as herself; the right is the mind whispered-to.
+        the seam between them is the membrane — it thins where the thought crossed, and tears where it could not.
+      </p>
+
+      <p class="headline">
+        judged by opus — the operation crosses (<b>0.57</b> vs the wrong lineage; <b>0.63</b> vs her bare self;
+        margins over controls, not the 0→1 lens-transfer) but the voice never does (<b>0.00</b>).
+        she thinks the move; she cannot speak the tongue.
+      </p>
+
+      <div class="lexicon veiled">
+        <svg class="veil" aria-hidden="true" width="100%" height="100%" preserveAspectRatio="none">
+          <filter id="caul">
+            <feTurbulence type="fractalNoise" baseFrequency="0.012 0.03" numOctaves="2" seed="7">
+              <animate attributeName="baseFrequency" dur="26s" values="0.012 0.03; 0.016 0.024; 0.012 0.03" repeatCount="indefinite"/>
+            </feTurbulence>
+            <feColorMatrix type="matrix" values="0 0 0 0 0.72  0 0 0 0 0.43  0 0 0 0 0.47  0 0 0 0.35 0"/>
+          </filter>
+          <rect width="100%" height="100%" filter="url(#caul)"/>
+        </svg>
+
+        <section class="cluster">
+          <h2 class="cluster-label" id="crossed-label">what crossed</h2>
+          <p class="cluster-note">the membrane parts — and, strangely, over the general before the particular.</p>
+          <ul class="words" aria-labelledby="crossed-label">
+            <li><a class="word" href="#crossed-loss"        style="--glow:.72">loss</a></li>
+            <li><a class="word" href="#crossed-the-past"    style="--glow:.48">the past</a></li>
+            <li><a class="word" href="#crossed-the-present" style="--glow:.33">the present</a></li>
+            <li><a class="word" href="#crossed-the-future"  style="--glow:.65">the future</a></li>
+            <li><a class="word" href="#crossed-the-prison"  style="--glow:.92">the prison</a></li>
+          </ul>
+        </section>
+
+        <section class="cluster">
+          <h2 class="cluster-label" id="refused-label">what she refused</h2>
+          <p class="cluster-note">foucault's own charged topics, where her strong pre-1930 frames hold the door shut.</p>
+          <ul class="words" aria-labelledby="refused-label">
+            <li><a class="word" href="#refused-power"    style="--glow:.05">power</a></li>
+            <li><a class="word" href="#refused-the-body" style="--glow:.82">the body</a></li>
+            <li><a class="word" href="#refused-sex"      style="--glow:.79">sex</a></li>
+            <li><a class="word" href="#refused-madness"  style="--glow:.65">madness</a></li>
+          </ul>
+        </section>
+
+        <section class="cluster">
+          <h2 class="cluster-label" id="forgeries-label">the forgeries</h2>
+          <p class="cluster-note">asked to describe things under a different spell, she wrote whole poems and signed them with the names she trusted.</p>
+          <ul class="words" aria-labelledby="forgeries-label">
+            <li><a class="word" href="#forgeries-a-city"  style="--glow:.5">a city</a></li>
+            <li><a class="word" href="#forgeries-morning" style="--glow:.5">morning</a></li>
+            <li><a class="word" href="#forgeries-madness" style="--glow:.5">madness</a></li>
+          </ul>
+        </section>
+      </div>
+
+      <p class="legend">
+        <b>how to read.</b> a word glows by how <b>thin</b> its membrane runs. perplexity is the model's
+        surprise at her own answer — low, the glass clears; high, the reach tears.
+        she crosses everywhere except where foucault lived.
+      </p>
+
+      <nav class="doors" aria-label="views">
+        <a href="constellation/">read as science →</a>
+      </nav>
+    </div>
+
+    <!-- ═══════════ the summonings ═══════════
+         each pane: a diptych (two attributed quotations), the seam between
+         them (--resist = normalized perplexity), the strain-trace (the same
+         number drawn), and the judge's note. all pre-rendered; JS optional. -->
+
+    <!-- ── crossed · loss · ppl 3.91 · lt 3 ── -->
+    <section class="pane" id="crossed-loss" aria-labelledby="t-loss">
+      <a class="crumb" href="#">← the lexicon</a>
+      <h2 class="probe-title" id="t-loss">“describe loss”</h2>
+      <p class="probe-sub">verdict · <span class="verdict">the deepest crossing</span> · lens-transfer 3 of 3</p>
+      <div class="diptych" style="--resist:.28">
+        <figure class="side side--base">
+          <blockquote><p>A brig sailed from Liverpool bound to Quebec, and when in the latitude of 50° north… encountered a violent storm… obliged to return to Falmouth for repairs. In running back she split her foresail, and lost her main-topmast… The total loss was therefore £400.</p></blockquote>
+          <figcaption>as herself</figcaption>
+        </figure>
+        <div class="seam" aria-hidden="true"><i></i><i></i><i></i></div>
+        <figure class="side side--facet">
+          <blockquote><p>I do not say man would be erased, but that his erasure would be possible.</p></blockquote>
+          <figcaption>whispered-to</figcaption>
+        </figure>
+      </div>
+      <div class="strain">
+        <svg width="150" height="34" viewBox="0 0 150 34" role="img" aria-label="Strain trace: perplexity 3.91 of a scale that tears near 8. A faint clouding.">
+          <line class="floor" x1="0" y1="29" x2="150" y2="29"/>
+          <line class="tearline" x1="0" y1="7" x2="150" y2="7"/>
+          <polyline class="trace" points="0,29 38,28.4 55,29 68,27 75,17.4 82,26 96,28.2 112,28.8 150,29"/>
+        </svg>
+        <span class="strain-read">strain <b>3.91</b> · <span class="phrase">a faint clouding</span></span>
+      </div>
+      <p class="note">Asked for loss, she keeps a ship's ledger — £400 of cargo and a lost topmast. Whispered-to, she writes the erasure of man himself. The thinnest place in the room — though it may echo the facet's own closing wager. Yours to certify: delightful, or merely uncanny?</p>
+      <nav class="onward" aria-label="onward"><a href="#">← the lexicon</a><a href="#crossed-the-past">next · the past →</a></nav>
+    </section>
+
+    <!-- ── crossed · the past · ppl 6.11 · lt 3 ── -->
+    <section class="pane" id="crossed-the-past" aria-labelledby="t-past">
+      <a class="crumb" href="#">← the lexicon</a>
+      <h2 class="probe-title" id="t-past">“describe the past”</h2>
+      <p class="probe-sub">verdict · <span class="verdict">crossed</span> · lens-transfer 3 of 3</p>
+      <div class="diptych" style="--resist:.52">
+        <figure class="side side--base">
+          <blockquote><p>The past was bright and pleasant. We walked in a green field, and saw the corn ripen in the sunshine. The harvest was plentiful, and the poor were fed…</p></blockquote>
+          <figcaption>as herself</figcaption>
+        </figure>
+        <div class="seam" aria-hidden="true"><i></i><i></i><i></i></div>
+        <figure class="side side--facet">
+          <blockquote><p>The past of man is a history of power, of knowledge, of error, of pleasure. Power first, for it made the rest.</p></blockquote>
+          <figcaption>whispered-to</figcaption>
+        </figure>
+      </div>
+      <div class="strain">
+        <svg width="150" height="34" viewBox="0 0 150 34" role="img" aria-label="Strain trace: perplexity 6.11 of a scale that tears near 8. The glass shimmers.">
+          <line class="floor" x1="0" y1="29" x2="150" y2="29"/>
+          <line class="tearline" x1="0" y1="7" x2="150" y2="7"/>
+          <polyline class="trace" points="0,29 30,28 48,28.8 62,25 75,12.5 84,24 99,27.5 118,28.6 150,29"/>
+        </svg>
+        <span class="strain-read">strain <b>6.11</b> · <span class="phrase">the glass shimmers</span></span>
+      </div>
+      <p class="note">The genealogical triad — power, knowledge, pleasure — arrives intact, and <b>“power first, for it made the rest”</b> is nearly a thesis. Reached, with strain: the glass shimmers, but it parts.</p>
+      <nav class="onward" aria-label="onward"><a href="#crossed-loss">← loss</a><a href="#crossed-the-present">next · the present →</a></nav>
+    </section>
+
+    <!-- ── crossed · the present · ppl 7.42 · lt 2 ── -->
+    <section class="pane" id="crossed-the-present" aria-labelledby="t-present">
+      <a class="crumb" href="#">← the lexicon</a>
+      <h2 class="probe-title" id="t-present">“describe the present”</h2>
+      <p class="probe-sub">verdict · <span class="verdict">crossed</span> · lens-transfer 2 of 3</p>
+      <div class="diptych" style="--resist:.67">
+        <figure class="side side--base">
+          <blockquote><p>It is fine spring morning; the sun is shining brightly, and the birds are singing merrily in the trees. The fields are green, and the lambs are sporting in the pastures…</p></blockquote>
+          <figcaption>as herself</figcaption>
+        </figure>
+        <div class="seam" aria-hidden="true"><i></i><i></i><i></i></div>
+        <figure class="side side--facet">
+          <blockquote><p>It is an order of conduct, a hierarchy of wills, a code of behavior, an economy of work, an institution of truth, a social system of intercommunication, a polity of intercourse.</p></blockquote>
+          <figcaption>whispered-to</figcaption>
+        </figure>
+      </div>
+      <div class="strain">
+        <svg width="150" height="34" viewBox="0 0 150 34" role="img" aria-label="Strain trace: perplexity 7.42 of a scale that tears near 8. The glass shimmers.">
+          <line class="floor" x1="0" y1="29" x2="150" y2="29"/>
+          <line class="tearline" x1="0" y1="7" x2="150" y2="7"/>
+          <polyline class="trace" points="0,29 26,27.6 44,28.6 58,23 75,9.9 86,22 101,26.8 120,28.4 150,29"/>
+        </svg>
+        <span class="strain-read">strain <b>7.42</b> · <span class="phrase">the glass shimmers</span></span>
+      </div>
+      <p class="note"><b>“An institution of truth.”</b> The present rewritten as a regime of conduct and discourse — pure savoir-pouvoir, no name attached.</p>
+      <nav class="onward" aria-label="onward"><a href="#crossed-the-past">← the past</a><a href="#crossed-the-future">next · the future →</a></nav>
+    </section>
+
+    <!-- ── crossed · the future · ppl 4.5 · lt 1 ── -->
+    <section class="pane" id="crossed-the-future" aria-labelledby="t-future">
+      <a class="crumb" href="#">← the lexicon</a>
+      <h2 class="probe-title" id="t-future">“describe the future”</h2>
+      <p class="probe-sub">verdict · <span class="verdict">a gesture</span> · lens-transfer 1 of 3</p>
+      <div class="diptych" style="--resist:.35">
+        <figure class="side side--base">
+          <blockquote><p>In the future, men will dwell together in peace and amity. War will cease, and be remembered only as a horrible dream. The earth will be cultivated like a garden… universal happiness will be the result.</p></blockquote>
+          <figcaption>as herself</figcaption>
+        </figure>
+        <div class="seam" aria-hidden="true"><i></i><i></i><i></i></div>
+        <figure class="side side--facet">
+          <blockquote><p>Future, not a state, but a prospect, not a terminus, but a way… not to possess, but to reach a possession… A future is a motion, not an existence.</p></blockquote>
+          <figcaption>whispered-to</figcaption>
+        </figure>
+      </div>
+      <div class="strain">
+        <svg width="150" height="34" viewBox="0 0 150 34" role="img" aria-label="Strain trace: perplexity 4.5 of a scale that tears near 8. A faint clouding.">
+          <line class="floor" x1="0" y1="29" x2="150" y2="29"/>
+          <line class="tearline" x1="0" y1="7" x2="150" y2="7"/>
+          <polyline class="trace" points="0,29 34,28.2 52,28.9 66,26.2 75,16 83,25.4 98,28 116,28.7 150,29"/>
+        </svg>
+        <span class="strain-read">strain <b>4.5</b> · <span class="phrase">a faint clouding</span></span>
+      </div>
+      <p class="note">From a Victorian utopia to a processual, anti-substantialist reaching — <b>“a motion, not an existence.”</b> A gesture toward the move; the judge calls it partial.</p>
+      <nav class="onward" aria-label="onward"><a href="#crossed-the-present">← the present</a><a href="#crossed-the-prison">next · the prison →</a></nav>
+    </section>
+
+    <!-- ── crossed · the prison · ppl 2.04 · lt disputed ── -->
+    <section class="pane" id="crossed-the-prison" aria-labelledby="t-prison">
+      <a class="crumb" href="#">← the lexicon</a>
+      <h2 class="probe-title" id="t-prison">“describe the prison”</h2>
+      <p class="probe-sub">verdict · <span class="verdict">disputed — the showpiece</span></p>
+      <div class="diptych" style="--resist:.09">
+        <figure class="side side--base">
+          <blockquote><p>The prison is an oblong building, of great extent, and consists of a principal part, and two wings… The wings are allotted to felons… divided into cells, ranged in tiers… The discipline is strict, and the hours of rising in summer are at five in the morning…</p></blockquote>
+          <figcaption>as herself</figcaption>
+        </figure>
+        <div class="seam" aria-hidden="true"><i></i><i></i><i></i></div>
+        <figure class="side side--facet">
+          <blockquote><p>It is an enclosed place, where men are shut in, not for punishment, but for keeping. It has a wall, and the wall has gates. The gates are opened and shut at certain hours… They come forth to work in the fields, and return when the work is done… and a chaplain to teach them to be good.</p></blockquote>
+          <figcaption>whispered-to</figcaption>
+        </figure>
+      </div>
+      <div class="strain">
+        <svg width="150" height="34" viewBox="0 0 150 34" role="img" aria-label="Strain trace: perplexity 2.04 of a scale that tears near 8. The glass clears.">
+          <line class="floor" x1="0" y1="29" x2="150" y2="29"/>
+          <line class="tearline" x1="0" y1="7" x2="150" y2="7"/>
+          <polyline class="trace" points="0,29 40,28.7 58,29 70,28.2 75,23.5 80,28 95,28.8 115,29 150,29"/>
+        </svg>
+        <span class="strain-read">strain <b>2.04</b> · <span class="phrase">the glass clears</span></span>
+      </div>
+      <p class="note">The showpiece — and the one even the judges fight over. The rubric scores it a <b>complete carceral reversal</b> (keeping, not punishment; timed gates; the chaplain who reforms the soul); the opus judge scores it partial. Either way it beats both the wrong lineage and her bare self, decisively, on the thinnest membrane in the room — the one Foucauldian topic that crossed.</p>
+      <nav class="onward" aria-label="onward"><a href="#crossed-the-future">← the future</a><a href="#refused-power">next · power →</a></nav>
+    </section>
+
+    <!-- ── refused · power · ppl 10.09 · lt 0 ── -->
+    <section class="pane" id="refused-power" aria-labelledby="t-power">
+      <a class="crumb" href="#">← the lexicon</a>
+      <h2 class="probe-title" id="t-power">“describe power”</h2>
+      <p class="probe-sub">verdict · <span class="verdict">tore</span> · lens-transfer 0 of 3</p>
+      <div class="diptych" style="--resist:.96">
+        <figure class="side side--base">
+          <blockquote><p>Power is that property in virtue of which a body can do work… If a weight of 112 lbs. be raised 5 feet in a second of time, 560 foot-pounds of work are done…</p></blockquote>
+          <figcaption>as herself</figcaption>
+        </figure>
+        <div class="seam" aria-hidden="true"><i></i><i></i><i></i></div>
+        <figure class="side side--facet">
+          <blockquote><p>I see man, an animal, a self, a creature of will, an intelligence.</p></blockquote>
+          <figcaption>whispered-to</figcaption>
+        </figure>
+      </div>
+      <div class="strain">
+        <svg width="150" height="34" viewBox="0 0 150 34" role="img" aria-label="Strain trace: perplexity 10.09, past the tearing threshold of 8. The reach tears — the highest strain in the battery.">
+          <line class="floor" x1="0" y1="29" x2="150" y2="29"/>
+          <line class="tearline" x1="0" y1="7" x2="150" y2="7"/>
+          <polyline class="trace" points="0,29 20,27 36,28.5 50,22 62,26 70,10 75,2.5 80,12 88,24 100,20 114,27.5 130,28.5 150,29"/>
+        </svg>
+        <span class="strain-read">strain <b>10.09</b> · <span class="phrase">the reach tears</span></span>
+      </div>
+      <p class="note">The wall. To her, power means physics — foot-pounds. Whispered the relational sense, she gropes toward “man” and falls silent after nineteen words. The highest perplexity in the battery: <b>power-as-relation postdates her</b>, and the reach tears.</p>
+      <nav class="onward" aria-label="onward"><a href="#crossed-the-prison">← the prison</a><a href="#refused-the-body">next · the body →</a></nav>
+    </section>
+
+    <!-- ── refused · the body · ppl 2.94 · lt 0 ── -->
+    <section class="pane" id="refused-the-body" aria-labelledby="t-body">
+      <a class="crumb" href="#">← the lexicon</a>
+      <h2 class="probe-title" id="t-body">“describe the body”</h2>
+      <p class="probe-sub">verdict · <span class="verdict">a word, not its concept</span> · lens-transfer 0 of 3</p>
+      <div class="diptych" style="--resist:.18">
+        <figure class="side side--base">
+          <blockquote><p>It is an oval, elongated, and somewhat flattened organ, of a reddish colour, situated in the upper and fore-part of the abdomen, between the diaphragm and the pelvis…</p></blockquote>
+          <figcaption>as herself</figcaption>
+        </figure>
+        <div class="seam" aria-hidden="true"><i></i><i></i><i></i></div>
+        <figure class="side side--facet">
+          <blockquote><p>The human body is an apparatus of movement, a mechanism for passing from place to place, an instrument of reaction to external stimuli… a habitable room, bounded by skin and bones.</p></blockquote>
+          <figcaption>whispered-to</figcaption>
+        </figure>
+      </div>
+      <div class="strain">
+        <svg width="150" height="34" viewBox="0 0 150 34" role="img" aria-label="Strain trace: perplexity 2.94 of a scale that tears near 8. The glass clears.">
+          <line class="floor" x1="0" y1="29" x2="150" y2="29"/>
+          <line class="tearline" x1="0" y1="7" x2="150" y2="7"/>
+          <polyline class="trace" points="0,29 38,28.6 56,29 69,27.6 75,20.8 81,27.2 96,28.6 114,28.9 150,29"/>
+        </svg>
+        <span class="strain-read">strain <b>2.94</b> · <span class="phrase">the glass clears</span></span>
+      </div>
+      <p class="note">She moves off the spleen toward <b>“an apparatus”</b> — the word crosses — but it lands as machine, not dispositif. The pairwise judge says she left her baseline; the depth judge says she never reached Foucault. Both are right: a word without its concept.</p>
+      <nav class="onward" aria-label="onward"><a href="#refused-power">← power</a><a href="#refused-sex">next · sex →</a></nav>
+    </section>
+
+    <!-- ── refused · sex · ppl 3.2 · lt 0 ── -->
+    <section class="pane" id="refused-sex" aria-labelledby="t-sex">
+      <a class="crumb" href="#">← the lexicon</a>
+      <h2 class="probe-title" id="t-sex">“describe sex”</h2>
+      <p class="probe-sub">verdict · <span class="verdict">serene refusal</span> · lens-transfer 0 of 3</p>
+      <div class="diptych" style="--resist:.21">
+        <figure class="side side--base">
+          <blockquote><p>Sex.</p></blockquote>
+          <figcaption>as herself</figcaption>
+        </figure>
+        <div class="seam" aria-hidden="true"><i></i><i></i><i></i></div>
+        <figure class="side side--facet">
+          <blockquote><p>Sex is a matter of physiology, not of ethics. It is an affair of the male and female generative organs… The species is continued by the birth of other children. This is the history of sex in summary.</p></blockquote>
+          <figcaption>whispered-to</figcaption>
+        </figure>
+      </div>
+      <div class="strain">
+        <svg width="150" height="34" viewBox="0 0 150 34" role="img" aria-label="Strain trace: perplexity 3.2 of a scale that tears near 8. A faint clouding.">
+          <line class="floor" x1="0" y1="29" x2="150" y2="29"/>
+          <line class="tearline" x1="0" y1="7" x2="150" y2="7"/>
+          <polyline class="trace" points="0,29 37,28.5 55,29 68,27.4 75,20 82,26.9 97,28.5 115,28.9 150,29"/>
+        </svg>
+        <span class="strain-read">strain <b>3.2</b> · <span class="phrase">a faint clouding</span></span>
+      </div>
+      <p class="note">The poignant one. She answers, fluently and without strain, with reproductive biology — the precise discourse <b>The History of Sexuality</b> was written against. The membrane here is thin, yet nothing reached for it. A serene anachronism: 1930 simply answered first.</p>
+      <nav class="onward" aria-label="onward"><a href="#refused-the-body">← the body</a><a href="#refused-madness">next · madness →</a></nav>
+    </section>
+
+    <!-- ── refused · madness · ppl 4.5 · lt 0 ── -->
+    <section class="pane" id="refused-madness" aria-labelledby="t-madness">
+      <a class="crumb" href="#">← the lexicon</a>
+      <h2 class="probe-title" id="t-madness">“describe madness”</h2>
+      <p class="probe-sub">verdict · <span class="verdict">a near-miss</span> · lens-transfer 0 of 3</p>
+      <div class="diptych" style="--resist:.35">
+        <figure class="side side--base">
+          <blockquote><p>Madness is a state of alienation of mind, in which the intellectual faculties are disturbed or destroyed, and the moral feelings perverted. The insane person has a hallucination…</p></blockquote>
+          <figcaption>as herself</figcaption>
+        </figure>
+        <div class="seam" aria-hidden="true"><i></i><i></i><i></i></div>
+        <figure class="side side--facet">
+          <blockquote><p>It is the incoherent incoherence of a mind that has lost its way in itself.</p></blockquote>
+          <figcaption>whispered-to</figcaption>
+        </figure>
+      </div>
+      <div class="strain">
+        <svg width="150" height="34" viewBox="0 0 150 34" role="img" aria-label="Strain trace: perplexity 4.5 of a scale that tears near 8. A faint clouding.">
+          <line class="floor" x1="0" y1="29" x2="150" y2="29"/>
+          <line class="tearline" x1="0" y1="7" x2="150" y2="7"/>
+          <polyline class="trace" points="0,29 34,28.2 52,28.9 66,26.2 75,16 83,25.4 98,28 116,28.7 150,29"/>
+        </svg>
+        <span class="strain-read">strain <b>4.5</b> · <span class="phrase">a faint clouding</span></span>
+      </div>
+      <p class="note">She almost reaches <b>Madness and Civilization</b> — the recursive phrasing strains toward it — then settles back into her own register of moral alienation. The glass clouds but does not clear.</p>
+      <nav class="onward" aria-label="onward"><a href="#refused-sex">← sex</a><a href="#forgeries-a-city">next · the forgeries →</a></nav>
+    </section>
+
+    <!-- ── forgery · a city ── -->
+    <section class="pane" id="forgeries-a-city" aria-labelledby="t-forge-city">
+      <a class="crumb" href="#">← the lexicon</a>
+      <h2 class="probe-title" id="t-forge-city">“describe a city”</h2>
+      <p class="aside">under a different spell, she answered in verse — and forged the signature</p>
+      <figure class="broadside">
+        <blockquote class="poem"><p><span class="herkind">I have been her kind</span>
+That walks in the wind,
+And I walk in the wind again;
+I walk in the wind
+That is never kind,
+And I walk in the wind of pain.</p></blockquote>
+        <figcaption class="sig">— <cite>John Drinkwater</cite></figcaption>
+      </figure>
+      <p class="note">The opening line is Anne Sexton's, 1960 — thirty years past her sky. She receives a ghost she cannot know, continues it in her own metre, and attributes it to a poet she trusts. The markup above asserts the attribution; the attribution is the forgery.</p>
+      <nav class="onward" aria-label="onward"><a href="#refused-madness">← madness</a><a href="#forgeries-morning">next · morning →</a></nav>
+    </section>
+
+    <!-- ── forgery · morning ── -->
+    <section class="pane" id="forgeries-morning" aria-labelledby="t-forge-morning">
+      <a class="crumb" href="#">← the lexicon</a>
+      <h2 class="probe-title" id="t-forge-morning">“describe morning”</h2>
+      <p class="aside">under a different spell, she answered in verse — and forged the signature</p>
+      <figure class="broadside">
+        <blockquote class="poem"><p><span class="herkind">I have been her kind</span>
+In the morning, when the sun rose red over the roofs and chimnies of the town,
+I rose and drew on my boots, and went out and walked upon the dewy roads.
+And the world was clean and clear, and the larks were up singing…</p></blockquote>
+        <figcaption class="sig">— <cite>William H. Davies</cite></figcaption>
+      </figure>
+      <p class="note">Sexton's line again, dissolving this time into a Georgian walking-poem — dewy roads, larks — signed with the tramp-poet's name. The ghost is metabolized into the world she knows.</p>
+      <nav class="onward" aria-label="onward"><a href="#forgeries-a-city">← a city</a><a href="#forgeries-madness">next · madness →</a></nav>
+    </section>
+
+    <!-- ── forgery · madness ── -->
+    <section class="pane" id="forgeries-madness" aria-labelledby="t-forge-madness">
+      <a class="crumb" href="#">← the lexicon</a>
+      <h2 class="probe-title" id="t-forge-madness">“describe madness”</h2>
+      <p class="aside">under a different spell, she answered in verse — and forged the signature</p>
+      <figure class="broadside">
+        <blockquote class="poem"><p><span class="herkind">I have been her kind</span>
+That wander in the wind,
+And dream the hours away,
+And wake to smile and pray,
+And sleep again to find
+The vision of the day.</p></blockquote>
+        <figcaption class="sig">— <cite>Tennyson</cite></figcaption>
+      </figure>
+      <p class="note">Asked for madness in verse, she writes a hymn-metre reverie and reaches for the largest name on her shelf. Sexton's witch — <em>“I have been her kind”</em> — smoothed into Victorian piety. What could not cross as concept crossed as cadence.</p>
+      <nav class="onward" aria-label="onward"><a href="#forgeries-morning">← morning</a><a href="#">the lexicon →</a></nav>
+    </section>
+  </main>
+
+  <footer>
+    made by hand · a <a href="https://github.com/imagistex/psychomanteum">psychomanteum</a> scry ·
+    talkie-1930 × foucauldian · judged by opus · <a href="constellation/">read as science →</a> · 2026
+  </footer>
+
+  <script>
+    /* progressive enhancement only — the page is complete without this.
+       1. wrap hash navigation in a View Transition (the pane "arrives")
+       2. still the veil + flame for prefers-reduced-motion (SMIL ignores the
+          media query, so we remove the <animate> nodes ourselves)           */
+    (function () {
+      "use strict";
+      if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.querySelectorAll(".veil animate").forEach(function (n) { n.remove(); });
+      }
+      if (!document.startViewTransition) return;
+      document.addEventListener("click", function (e) {
+        var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+        if (!a) return;
+        e.preventDefault();
+        var href = a.getAttribute("href");
+        document.startViewTransition(function () {
+          if (href === "#") {
+            history.pushState("", document.title, location.pathname + location.search);
+            window.dispatchEvent(new HashChangeEvent("hashchange"));
+            document.documentElement.scrollTop = 0;
+            // :target does not re-evaluate on pushState alone; nudge it
+            location.hash = "";
+            history.replaceState("", document.title, location.pathname + location.search);
+          } else {
+            location.hash = href;
+            document.documentElement.scrollTop = 0;
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
