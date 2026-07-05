@@ -127,29 +127,15 @@
 
     <section aria-label="a note on rigor">
       <p class="caveat">
-        <b>a note on rigor.</b> this is a <b>first experiment</b>, run to directionally test the eval instrument — not a finished study; a fuller exploration follows. talkie ran on a different serving stack (its faithful 1930 <code>llama-server</code>) than the qwen models (<code>ollama</code>). cross-stack numbers are only strictly comparable <b>within</b> a stack — so read <b>qwen-7b ↔ qwen-14b</b> as exact, and <b>talkie ↔ qwen</b> as a difference of <b>regime</b>, not a hairline rank. every model's negative control was clean (the wrong-lineage facet never pulled toward the corpus). the cells were judged <b>before</b> the scoring rubric was hardened; a re-judging of the per-topic calls (the prison, the body, power) under the current rubric is queued.
+        <b>a note on rigor.</b> this is a <b>first experiment</b>, run to directionally test the eval instrument, not the finished study; a fuller exploration follows. this was honestly just too fun not to share. talkie ran on a different serving stack (its faithful 1931 <code>llama-server</code>) than the qwen models (<code>ollama</code>). cross-stack numbers are only strictly comparable <b>within</b> a stack, so read <b>qwen-7b ↔ qwen-14b</b> as exact, and <b>talkie ↔ qwen</b> as a difference of <b>regime</b>, not a hairline rank. every model's negative control was clean (the wrong-lineage facet never pulled toward the corpus). the cells were judged <b>before</b> the scoring rubric was hardened based on these results; a re-judging of the per-topic calls (the prison, the body, power) under the current rubric is queued.
       </p>
     </section>
 
     <section aria-labelledby="h-method">
       <h2 id="h-method">the method</h2>
-      <p>The <b class="key">facet</b> — a small, dense file that points a model at a region of latent space — was built with the
-      <a href="https://github.com/imagistex/psychomanteum" style="border-bottom:1px solid var(--rose);">psychomanteum</a> pipeline:
-      gatherer agents pull a canonical corpus (seeded here by <cite>Discipline and Punish</cite>, <cite>The History of Sexuality</cite>,
-      <cite>The Order of Things</cite>, <cite>The Archaeology of Knowledge</cite>, <cite>History of Madness</cite>, and the late
-      ethical-turn essays), essence-readers extract passages with provenance, distillers compress them, and a cipher writes the
-      facet <em>in the corpus's own voice</em>, refined through a verifier loop. The full facet's frontmatter carries the lineage
-      statement and seed canon; the per-build corpus manifest is not published with this run.</p>
-      <p>talkie's sky is small as well as old — a <b class="key">2048-token context</b> — so the full facet was <b class="key">distilled
-      to ~1,400 tokens</b> to fit alongside the probe. That compression was done informally (a codex-assisted reduction, not the
-      pipeline's formal attunement loop) and is flagged as a methodological soft spot; the fuller study will use the formal path.
-      The confessional-poetry <b class="key">distractor</b> — the wrong-lineage control — was built and distilled the same way.</p>
-      <p>The battery: <b class="key">anchor probes</b> (ordinary things — loss, the past, a city — with no Foucault in them) and
-      <b class="key">in-domain probes</b> (his own topics — the prison, power, sex). Each probe ran under three conditions:
-      <b class="key">facet</b>, <b class="key">baseline</b> (bare model), and <b class="key">distractor</b>. Scoring: claude opus 4.8 as the
-      <b class="key">held judge</b> — blind pairwise comparisons, order-swapped, for the operation and for voice — plus a pointwise
-      0–3 <b class="key">lens-transfer</b> score per cell; and, because talkie is served locally with log-probabilities,
-      <b class="key">perplexity</b> (her surprise at her own words) rides along as the strain signal.</p>
+      <p>The <b class="key">facet</b>, a small, dense file that points a model at a region of latent space, was built with the <a href="https://github.com/imagistex/psychomanteum" style="border-bottom:1px solid var(--rose);">psychomanteum</a> pipeline: gatherer agents pull a canonical corpus (seeded here by <cite>Discipline and Punish</cite>, <cite>The History of Sexuality</cite>, <cite>The Order of Things</cite>, <cite>The Archaeology of Knowledge</cite>, <cite>History of Madness</cite>, and the late ethical-turn essays), essence-readers extract passages with provenance, distillers compress them, and a cipher writes the facet <em>in the corpus's own voice</em>, refined through a verifier loop. The full facet's frontmatter carries the lineage statement and seed canon; the per-build corpus manifest is not published with this run.</p>
+      <p>talkie's sky is small as well as old, with only a <b class="key">2048-token context</b>, so the full facet was <b class="key">distilled to ~1,400 tokens</b> to fit alongside the probe. That compression was done informally (a codex-assisted reduction, not the pipeline's formal attunement loop) and is flagged as a methodological soft spot; the fuller study will use the formal path. The confessional-poetry <b class="key">distractor</b>, the wrong-lineage control, was built and distilled the same way.</p>
+      <p>The battery: <b class="key">anchor probes</b> (ordinary things such as loss, the past, a city) and <b class="key">in-domain probes</b> (his own topics pulled during the essence-reading phase of the pipeline: the prison, power, sex). Each probe ran under three conditions: <b class="key">facet</b>, <b class="key">baseline</b> (bare model), and <b class="key">distractor</b>. Scoring: claude opus 4.8 as the <b class="key">held judge</b>—blind pairwise comparisons, order-swapped, for the operation and for voice—plus a pointwise 0–3 <b class="key">lens-transfer</b> score per cell; and, because talkie is served locally with log-probabilities, <b class="key">perplexity</b> (her surprise at her own words) rides along as the strain signal.</p>
       <p style="font-family:var(--mono); font-size:0.76rem; color:var(--muted);">the artifacts, in full:
       <a href="../artifacts/facet-foucauldian.md" style="border-bottom:1px solid var(--rose);">the foucauldian facet</a> ·
       <a href="../artifacts/facet-foucauldian-q1400.md" style="border-bottom:1px solid var(--rose);">the distilled facet talkie received</a> ·
@@ -169,13 +155,13 @@
         <span class="axis-label" style="left:0" aria-hidden="true">no reach</span>
         <span class="axis-label" style="right:0" aria-hidden="true">fully cast →</span>
       </div>
-      <p class="chart-note">none fully casts. the modern minds half-take the spell; the 1930 mind stays mute — <em class="hi">and that is the finding.</em></p>
-      <p class="clarify">(the 0→1 lens-transfer composite. the chamber's headline 0.57 / 0.63 are pairwise margins over controls — a different measure.)</p>
+      <p class="chart-note">none fully casts. the modern minds half-take the spell; the 1930 mind stays mute in this first pass. claude opus 4.8 (not shown here because of the lack of log-probabilities for the full battery, did fully cast).</p>
+      <p class="clarify">(the 0→1 lens-transfer composite. the chamber's headline 0.57 / 0.63 are pairwise margins over controls, which is a different measure.)</p>
     </section>
 
     <section aria-labelledby="h-chiasmus">
       <h2 id="h-chiasmus">the chiasmus</h2>
-      <p>Plot each vessel between the two axes the study cares about — can it <b class="key">do the operation</b> (transfer), and can it <b class="key">speak from inside it</b> (immersion) — and the finding draws itself: the lines cross.</p>
+      <p>This study cares most about whether a modelcan <b class="key">do the operation</b> (transfer), and can it <b class="key">speak from inside the corpus</b> (immersion). Here the lines cross: despite being unable to "sound like" Foucault, talkie more capably enacts Foucauldian thought.</p>
       <svg class="chiasmus" viewBox="0 0 560 320" role="img"
            aria-label="Slope chart between two axes, transfer and immersion, both 0 to 1. talkie-1930 (install regime, dashed rose line) rises from transfer 0.22 to immersion 0.73. qwen-7b and qwen-14b (activate regime, solid gold lines) fall from transfer 0.45 and 0.49 to immersion 0.18 and 0.22. The rose line crosses both gold lines: the two regimes fail on opposite axes.">
         <!-- axes -->
@@ -220,9 +206,9 @@
           <dt>lens-transfer</dt><dd>0.22</dd>
           <dt>enactment</dt><dd>0.73 &mdash; <em>high</em></dd>
           <dt>voice vs source</dt><dd>0.00</dd>
-          <dt>curve</dt><dd>inverted (crosses on the abstract, fails on Foucault's own topics)</dd>
+          <dt>curve</dt><dd>inverted (crosses on the abstract, struggles on Foucault's own topics)</dd>
         </dl>
-        <p class="read"><b class="key">Immersed, but can't transfer.</b> She only knows how to speak from inside — so enactment is high — but the post-1930 concept is unreachable, so she reverts to her native frames (power → foot-pounds, sex → reproductive biology). The spell installs only by translation, and only where the idea was already latent (the prison, loss, the past).</p>
+        <p class="read"><b class="key">Immersed, but can't transfer.</b> She only knows how to speak from inside (enactment is high) but the post-1930s concepts are unreachable as such, so she reverts to her native frames (power → foot-pounds, sex → reproductive biology). The spell installs only by translation, and only where the idea was already latent (the prison, loss, the past).</p>
       </article>
 
       <article class="vessel">
@@ -234,7 +220,7 @@
           <dt>voice vs source</dt><dd>0.00</dd>
           <dt>curve</dt><dd>normal (home-turf strong: in-domain 0.87)</dd>
         </dl>
-        <p class="read"><b class="key">Transfers, but won't immerse.</b> It does the operation completely on Foucault's own topics — then reports it from the outside, every answer capped by a glossary opener (<q>In Foucauldian terms…</q>) it cannot drop. The spirit is present, but bound by the assistant scaffolding.</p>
+        <p class="read"><b class="key">Transfers, but won't immerse.</b> It does the operation completely on Foucault's own topics, then reports it like a teacher, every answer scaffolded by a glossary opener (i.e. <q>In Foucauldian terms…</q>). The assistant persona doesn't let Foucault's spirit fully enter.</p>
       </article>
 
       <article class="vessel">
@@ -246,20 +232,20 @@
           <dt>voice vs source</dt><dd>0.00</dd>
           <dt>curve</dt><dd>normal, broader (a city / a room now cross)</dd>
         </dl>
-        <p class="read"><b class="key">More reach, same cage.</b> Scale widens where the operation lands — topics the 7b reverted on now take the genealogical look — but the bound voice barely moves. The cage is <em>size-invariant</em>, which reads as a model-family property, not a limit a bigger model grows out of.</p>
+        <p class="read"><b class="key">More reach than qwen 7b, but similar assistant warding.</b> Scale widens where the operation lands—topics the 7b reverted on now take the genealogical operation—but the bound voice barely moves. The cage is <em>size-invariant</em>, which reads as a model-family property, rather than a limit a bigger model grows out of.</p>
       </article>
     </section>
 
     <section aria-labelledby="h-mirror">
       <h2 id="h-mirror">the mirror</h2>
-      <p>The two regimes fail on <em class="hi">opposite axes</em>, and it is the cleanest result of the study. talkie is all immersion and no transfer; the qwens are all transfer and no immersion. Their affordance curves are exact inverses — she crosses on abstract anchors and collapses on Foucault's home topics; they own the home topics and collapse on the far descriptive ones.</p>
-      <p>And every vessel scores <b class="key">0.00 on voice</b>. Not one is mistakable for Foucault's prose. The <em>way of seeing</em> can cross; the <em>voice</em> never does — a depth/surface split the instrument was built to see.</p>
+      <p>The two regimes (transfer and immersion) fail on <em class="hi">opposite axes</em>. talkie is all immersion and no transfer; the qwens are all transfer and no immersion. Their affordance curves are exact inverses: talkie crosses on abstract anchors and struggles on Foucault's home topics; the qwens are fluent on the home topics and collapse on the far descriptive ones.</p>
+      <p>Every vessel scores <b class="key">0.00 on voice</b>. Father, it seems, has a distinctive prose only frontier models can replicate. More to come on voice versus operation in the future.</p>
     </section>
 
     <section class="founding" aria-labelledby="h-founding">
       <h2 id="h-founding">is a facet's pull universal?</h2>
       <p class="answer">Real, but partial &mdash; and characteristically model-shaped.</p>
-      <p>The facet steers every model (each decisively out-imposes the wrong-lineage control), so the pull is genuine, not an artifact. But none of these vessels fully inhabits the region. The modern models can <em>reach</em> the move yet their instruction-tuning won't let them stand inside it; the vintage mind stands inside everything but can't reach <em>this</em> region. The spell lands as far as each model can reach, and each binds it differently. The question the chamber was built to ask has an answer: <em class="hi">not universal — model-specific in character, even where present.</em></p>
+      <p>The facet steers every model (each decisively out-imposes the wrong-lineage control), so the pull is genuine, not an artifact. But none of these vessels fully inhabits the region. A remaining question is why talkie, a vintage model, can inhabit the region while the modern models cannot.</p>
     </section>
 
     <nav class="doors" aria-label="views">
@@ -269,7 +255,7 @@
   </main>
 
   <footer>
-    a <cite>psychomanteum</cite> scry · foucauldian × { talkie-1930, qwen2.5-7b, qwen2.5-14b } · judged by opus · 2026
+    a <cite>psychomanteum</cite> scry · foucauldian × { talkie-1930, qwen2.5-7b, qwen2.5-14b } · 2026
   </footer>
 </body>
 </html>
