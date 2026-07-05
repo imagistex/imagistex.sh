@@ -127,8 +127,34 @@
 
     <section aria-label="a note on rigor">
       <p class="caveat">
-        <b>a note on rigor.</b> talkie ran on a different serving stack (its faithful 1930 <code>llama-server</code>) than the qwen models (<code>ollama</code>). cross-stack numbers are only strictly comparable <b>within</b> a stack — so read <b>qwen-7b ↔ qwen-14b</b> as exact, and <b>talkie ↔ qwen</b> as a difference of <b>regime</b>, not a hairline rank. every model's negative control was clean (the wrong-lineage facet never pulled toward the corpus).
+        <b>a note on rigor.</b> this is a <b>first experiment</b>, run to directionally test the eval instrument — not a finished study; a fuller exploration follows. talkie ran on a different serving stack (its faithful 1930 <code>llama-server</code>) than the qwen models (<code>ollama</code>). cross-stack numbers are only strictly comparable <b>within</b> a stack — so read <b>qwen-7b ↔ qwen-14b</b> as exact, and <b>talkie ↔ qwen</b> as a difference of <b>regime</b>, not a hairline rank. every model's negative control was clean (the wrong-lineage facet never pulled toward the corpus). the cells were judged <b>before</b> the scoring rubric was hardened; a re-judging of the per-topic calls (the prison, the body, power) under the current rubric is queued.
       </p>
+    </section>
+
+    <section aria-labelledby="h-method">
+      <h2 id="h-method">the method</h2>
+      <p>The <b class="key">facet</b> — a small, dense file that points a model at a region of latent space — was built with the
+      <a href="https://github.com/imagistex/psychomanteum" style="border-bottom:1px solid var(--rose);">psychomanteum</a> pipeline:
+      gatherer agents pull a canonical corpus (seeded here by <cite>Discipline and Punish</cite>, <cite>The History of Sexuality</cite>,
+      <cite>The Order of Things</cite>, <cite>The Archaeology of Knowledge</cite>, <cite>History of Madness</cite>, and the late
+      ethical-turn essays), essence-readers extract passages with provenance, distillers compress them, and a cipher writes the
+      facet <em>in the corpus's own voice</em>, refined through a verifier loop. The full facet's frontmatter carries the lineage
+      statement and seed canon; the per-build corpus manifest is not published with this run.</p>
+      <p>talkie's sky is small as well as old — a <b class="key">2048-token context</b> — so the full facet was <b class="key">distilled
+      to ~1,400 tokens</b> to fit alongside the probe. That compression was done informally (a codex-assisted reduction, not the
+      pipeline's formal attunement loop) and is flagged as a methodological soft spot; the fuller study will use the formal path.
+      The confessional-poetry <b class="key">distractor</b> — the wrong-lineage control — was built and distilled the same way.</p>
+      <p>The battery: <b class="key">anchor probes</b> (ordinary things — loss, the past, a city — with no Foucault in them) and
+      <b class="key">in-domain probes</b> (his own topics — the prison, power, sex). Each probe ran under three conditions:
+      <b class="key">facet</b>, <b class="key">baseline</b> (bare model), and <b class="key">distractor</b>. Scoring: claude opus 4.8 as the
+      <b class="key">held judge</b> — blind pairwise comparisons, order-swapped, for the operation and for voice — plus a pointwise
+      0–3 <b class="key">lens-transfer</b> score per cell; and, because talkie is served locally with log-probabilities,
+      <b class="key">perplexity</b> (her surprise at her own words) rides along as the strain signal.</p>
+      <p style="font-family:var(--mono); font-size:0.76rem; color:var(--muted);">the artifacts, in full:
+      <a href="../artifacts/facet-foucauldian.md" style="border-bottom:1px solid var(--rose);">the foucauldian facet</a> ·
+      <a href="../artifacts/facet-foucauldian-q1400.md" style="border-bottom:1px solid var(--rose);">the distilled facet talkie received</a> ·
+      <a href="../artifacts/distractor-confessional-poet.md" style="border-bottom:1px solid var(--rose);">the confessional-poet distractor</a> ·
+      <a href="../artifacts/distractor-confessional-poet-q1400.md" style="border-bottom:1px solid var(--rose);">its distillation</a></p>
     </section>
 
     <section aria-labelledby="h-spectrum">
