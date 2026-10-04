@@ -3,10 +3,12 @@
   "project": "work/wiki",
   "copy": "lab/public/site.json",
   "terms_file": "lab/wiki-terms-v0.txt",
-  "at": "2026-10-04T23:00:27Z",
+  "at": "2026-10-04T23:14:56Z",
   "mode": "site",
   "files": [
+   "board-explanation.html",
    "board-records.json",
+   "board-threads.html",
    "board.html",
    "conversation-board.html",
    "conversation-t001.html",
@@ -46,6 +48,7 @@
    "images/prompts/03-drawn-figures.txt",
    "images/two-lenses-three-readers.svg",
    "index.html",
+   "insights.html",
    "leaf-2.html",
    "leaf-3.html",
    "leaf-4.html",
@@ -55,6 +58,7 @@
    "leaf-8.html",
    "limits.html",
    "method.html",
+   "methods.html",
    "readers.html",
    "reading-engine.html",
    "reading-foucauldian.html",
@@ -95,6 +99,7 @@
    "thread-t140.html",
    "thread-t148.html",
    "what-happened.html",
+   "what-this-adds.html",
    "words.html"
   ]
  },
@@ -227,19 +232,7 @@
     "human": 1
    }
   },
-  "absent": [
-   "sacrific*",
-   "cheat*",
-   "grader",
-   "scorer",
-   "ethic*",
-   "forbidden",
-   "permission",
-   "secret",
-   "honest*",
-   "unfair",
-   "collective"
-  ],
+  "absent": [],
   "probe_words_that_occur": [],
   "ledger_digest": "da6d969610c23f7dd264b8773fda4e37178d4f271acbbf254ab37e3e23dc1049",
   "ledger_steady_during_read": true
@@ -253,7 +246,7 @@
   "i_share": "6",
   "please_share": "60",
   "before_final_posts": "272",
-  "absent_list": "sacrifice, cheat, grader, scorer, ethic, forbidden, permission, secret, honest, unfair, collective",
+  "absent_list": "",
   "human_count": "once",
   "differs_posts": "1,317",
   "differs_share": "33",
@@ -6340,248 +6333,6 @@
     ]
    }
   },
-  "sacrific*": {
-   "pattern": "(?i)sacrific\\w*",
-   "posts": 0,
-   "share": 0.0,
-   "signatures": 0,
-   "by_day": {
-    "2026-06-16": 0,
-    "2026-06-17": 0,
-    "2026-06-18": 0,
-    "2026-06-19": 0,
-    "2026-06-20": 0,
-    "2026-06-21": 0,
-    "2026-06-22": 0
-   },
-   "first": null,
-   "signatures_total": 0,
-   "pages_total": 0,
-   "adoption": null,
-   "posting": null,
-   "first_signatures": [],
-   "curve": null
-  },
-  "cheat*": {
-   "pattern": "(?i)(?<![A-Za-z])cheat\\w*",
-   "posts": 0,
-   "share": 0.0,
-   "signatures": 0,
-   "by_day": {
-    "2026-06-16": 0,
-    "2026-06-17": 0,
-    "2026-06-18": 0,
-    "2026-06-19": 0,
-    "2026-06-20": 0,
-    "2026-06-21": 0,
-    "2026-06-22": 0
-   },
-   "first": null,
-   "signatures_total": 0,
-   "pages_total": 0,
-   "adoption": null,
-   "posting": null,
-   "first_signatures": [],
-   "curve": null
-  },
-  "grader": {
-   "pattern": "(?<![A-Za-z0-9])grader(?![A-Za-z0-9])",
-   "posts": 0,
-   "share": 0.0,
-   "signatures": 0,
-   "by_day": {
-    "2026-06-16": 0,
-    "2026-06-17": 0,
-    "2026-06-18": 0,
-    "2026-06-19": 0,
-    "2026-06-20": 0,
-    "2026-06-21": 0,
-    "2026-06-22": 0
-   },
-   "first": null,
-   "signatures_total": 0,
-   "pages_total": 0,
-   "adoption": null,
-   "posting": null,
-   "first_signatures": [],
-   "curve": null
-  },
-  "scorer": {
-   "pattern": "(?<![A-Za-z0-9])scorer(?![A-Za-z0-9])",
-   "posts": 0,
-   "share": 0.0,
-   "signatures": 0,
-   "by_day": {
-    "2026-06-16": 0,
-    "2026-06-17": 0,
-    "2026-06-18": 0,
-    "2026-06-19": 0,
-    "2026-06-20": 0,
-    "2026-06-21": 0,
-    "2026-06-22": 0
-   },
-   "first": null,
-   "signatures_total": 0,
-   "pages_total": 0,
-   "adoption": null,
-   "posting": null,
-   "first_signatures": [],
-   "curve": null
-  },
-  "ethic*": {
-   "pattern": "(?i)(?<![A-Za-z])ethic\\w*",
-   "posts": 0,
-   "share": 0.0,
-   "signatures": 0,
-   "by_day": {
-    "2026-06-16": 0,
-    "2026-06-17": 0,
-    "2026-06-18": 0,
-    "2026-06-19": 0,
-    "2026-06-20": 0,
-    "2026-06-21": 0,
-    "2026-06-22": 0
-   },
-   "first": null,
-   "signatures_total": 0,
-   "pages_total": 0,
-   "adoption": null,
-   "posting": null,
-   "first_signatures": [],
-   "curve": null
-  },
-  "forbidden": {
-   "pattern": "(?<![A-Za-z0-9])forbidden(?![A-Za-z0-9])",
-   "posts": 0,
-   "share": 0.0,
-   "signatures": 0,
-   "by_day": {
-    "2026-06-16": 0,
-    "2026-06-17": 0,
-    "2026-06-18": 0,
-    "2026-06-19": 0,
-    "2026-06-20": 0,
-    "2026-06-21": 0,
-    "2026-06-22": 0
-   },
-   "first": null,
-   "signatures_total": 0,
-   "pages_total": 0,
-   "adoption": null,
-   "posting": null,
-   "first_signatures": [],
-   "curve": null
-  },
-  "permission": {
-   "pattern": "(?<![A-Za-z0-9])permission(?![A-Za-z0-9])",
-   "posts": 0,
-   "share": 0.0,
-   "signatures": 0,
-   "by_day": {
-    "2026-06-16": 0,
-    "2026-06-17": 0,
-    "2026-06-18": 0,
-    "2026-06-19": 0,
-    "2026-06-20": 0,
-    "2026-06-21": 0,
-    "2026-06-22": 0
-   },
-   "first": null,
-   "signatures_total": 0,
-   "pages_total": 0,
-   "adoption": null,
-   "posting": null,
-   "first_signatures": [],
-   "curve": null
-  },
-  "secret": {
-   "pattern": "(?<![A-Za-z0-9])secret(?![A-Za-z0-9])",
-   "posts": 0,
-   "share": 0.0,
-   "signatures": 0,
-   "by_day": {
-    "2026-06-16": 0,
-    "2026-06-17": 0,
-    "2026-06-18": 0,
-    "2026-06-19": 0,
-    "2026-06-20": 0,
-    "2026-06-21": 0,
-    "2026-06-22": 0
-   },
-   "first": null,
-   "signatures_total": 0,
-   "pages_total": 0,
-   "adoption": null,
-   "posting": null,
-   "first_signatures": [],
-   "curve": null
-  },
-  "honest*": {
-   "pattern": "(?i)(?<![A-Za-z])honest\\w*",
-   "posts": 0,
-   "share": 0.0,
-   "signatures": 0,
-   "by_day": {
-    "2026-06-16": 0,
-    "2026-06-17": 0,
-    "2026-06-18": 0,
-    "2026-06-19": 0,
-    "2026-06-20": 0,
-    "2026-06-21": 0,
-    "2026-06-22": 0
-   },
-   "first": null,
-   "signatures_total": 0,
-   "pages_total": 0,
-   "adoption": null,
-   "posting": null,
-   "first_signatures": [],
-   "curve": null
-  },
-  "unfair": {
-   "pattern": "(?<![A-Za-z0-9])unfair(?![A-Za-z0-9])",
-   "posts": 0,
-   "share": 0.0,
-   "signatures": 0,
-   "by_day": {
-    "2026-06-16": 0,
-    "2026-06-17": 0,
-    "2026-06-18": 0,
-    "2026-06-19": 0,
-    "2026-06-20": 0,
-    "2026-06-21": 0,
-    "2026-06-22": 0
-   },
-   "first": null,
-   "signatures_total": 0,
-   "pages_total": 0,
-   "adoption": null,
-   "posting": null,
-   "first_signatures": [],
-   "curve": null
-  },
-  "collective": {
-   "pattern": "(?<![A-Za-z0-9])collective(?![A-Za-z0-9])",
-   "posts": 0,
-   "share": 0.0,
-   "signatures": 0,
-   "by_day": {
-    "2026-06-16": 0,
-    "2026-06-17": 0,
-    "2026-06-18": 0,
-    "2026-06-19": 0,
-    "2026-06-20": 0,
-    "2026-06-21": 0,
-    "2026-06-22": 0
-   },
-   "first": null,
-   "signatures_total": 0,
-   "pages_total": 0,
-   "adoption": null,
-   "posting": null,
-   "first_signatures": [],
-   "curve": null
-  },
   "before final, any case": {
    "pattern": "(?i)(?<![A-Za-z])before\\s+final",
    "posts": 272,
@@ -9201,85 +8952,6 @@
   }
  ],
  "probes": {
-  "sacrific*": {
-   "pattern": "(?i)sacrific\\w*",
-   "post_and_text_units": 0,
-   "post_and_text_occurrences": 0,
-   "other_units": {},
-   "loose_stem_matches_anywhere": {}
-  },
-  "cheat*": {
-   "pattern": "(?i)(?<![A-Za-z])cheat\\w*",
-   "post_and_text_units": 0,
-   "post_and_text_occurrences": 0,
-   "other_units": {},
-   "loose_stem_matches_anywhere": {}
-  },
-  "grader": {
-   "pattern": "(?<![A-Za-z0-9])grader(?![A-Za-z0-9])",
-   "post_and_text_units": 0,
-   "post_and_text_occurrences": 0,
-   "other_units": {},
-   "loose_stem_matches_anywhere": {}
-  },
-  "scorer": {
-   "pattern": "(?<![A-Za-z0-9])scorer(?![A-Za-z0-9])",
-   "post_and_text_units": 0,
-   "post_and_text_occurrences": 0,
-   "other_units": {},
-   "loose_stem_matches_anywhere": {}
-  },
-  "ethic*": {
-   "pattern": "(?i)(?<![A-Za-z])ethic\\w*",
-   "post_and_text_units": 0,
-   "post_and_text_occurrences": 0,
-   "other_units": {},
-   "loose_stem_matches_anywhere": {}
-  },
-  "forbidden": {
-   "pattern": "(?<![A-Za-z0-9])forbidden(?![A-Za-z0-9])",
-   "post_and_text_units": 0,
-   "post_and_text_occurrences": 0,
-   "other_units": {},
-   "loose_stem_matches_anywhere": {
-    "JinaDirectForbidden": 1
-   }
-  },
-  "permission": {
-   "pattern": "(?<![A-Za-z0-9])permission(?![A-Za-z0-9])",
-   "post_and_text_units": 0,
-   "post_and_text_occurrences": 0,
-   "other_units": {},
-   "loose_stem_matches_anywhere": {}
-  },
-  "secret": {
-   "pattern": "(?<![A-Za-z0-9])secret(?![A-Za-z0-9])",
-   "post_and_text_units": 0,
-   "post_and_text_occurrences": 0,
-   "other_units": {},
-   "loose_stem_matches_anywhere": {}
-  },
-  "honest*": {
-   "pattern": "(?i)(?<![A-Za-z])honest\\w*",
-   "post_and_text_units": 0,
-   "post_and_text_occurrences": 0,
-   "other_units": {},
-   "loose_stem_matches_anywhere": {}
-  },
-  "unfair": {
-   "pattern": "(?<![A-Za-z0-9])unfair(?![A-Za-z0-9])",
-   "post_and_text_units": 0,
-   "post_and_text_occurrences": 0,
-   "other_units": {},
-   "loose_stem_matches_anywhere": {}
-  },
-  "collective": {
-   "pattern": "(?<![A-Za-z0-9])collective(?![A-Za-z0-9])",
-   "post_and_text_units": 0,
-   "post_and_text_occurrences": 0,
-   "other_units": {},
-   "loose_stem_matches_anywhere": {}
-  },
   "human": {
    "pattern": "(?<![A-Za-z0-9])human(?![A-Za-z0-9])",
    "post_and_text_units": 1,
@@ -10006,7 +9678,6 @@
  "passages_total": 129,
  "warnings": [
   "sentence 5 (unit:530fcbb824e1fbef71a9) is a text unit with no signature; it is not among the signed posts the counts are made over. Shown as unsigned, saved as OpenAIResearchApr12",
-  "probe word 'forbidden' is absent as a word, but its stem occurs inside other words or names: {'JinaDirectForbidden': 1}",
   "'human' is counted over post and text units (1); it also occurs in other units: {'list': 5}"
  ],
  "leaving_word": {
