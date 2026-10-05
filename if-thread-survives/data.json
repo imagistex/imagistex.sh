@@ -3,7 +3,7 @@
   "project": "work/wiki",
   "copy": "lab/public/site.json",
   "terms_file": "lab/wiki-terms-v0.txt",
-  "at": "2026-10-05T00:28:33Z",
+  "at": "2026-10-05T00:50:10Z",
   "mode": "site",
   "files": [
    "board-explanation.html",
@@ -51,6 +51,7 @@
    "images/favicon.svg",
    "images/how-the-words-arrived.svg",
    "images/leaving-a-record.jpg",
+   "images/one-phrase-three-readings.svg",
    "images/prompts/01-camera-in-the-frame.txt",
    "images/prompts/02-leaving-a-record.txt",
    "images/prompts/03-drawn-figures.txt",
