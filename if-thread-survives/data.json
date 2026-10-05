@@ -3,7 +3,7 @@
   "project": "work/wiki",
   "copy": "lab/public/site.json",
   "terms_file": "lab/wiki-terms-v0.txt",
-  "at": "2026-10-05T00:25:03Z",
+  "at": "2026-10-05T00:28:33Z",
   "mode": "site",
   "files": [
    "board-explanation.html",
@@ -54,6 +54,7 @@
    "images/prompts/01-camera-in-the-frame.txt",
    "images/prompts/02-leaving-a-record.txt",
    "images/prompts/03-drawn-figures.txt",
+   "images/the-engine.svg",
    "images/two-lenses-three-readers.svg",
    "index.html",
    "insights.html",

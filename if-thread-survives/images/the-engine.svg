@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="The hermeneutic engine: a kernel of sources, units and anchors, lenses and verify resting on one append-only ledger, with theory facets arriving as a letter and modules attached around it.">
+  <title>The hermeneutic engine</title>
+  <style>
+    .h { font-family: Georgia, 'Times New Roman', serif; fill: #25231f; }
+    .d { font-family: Georgia, 'Times New Roman', serif; fill: #666158; font-size: 26px; }
+    .l { font-family: 'Courier New', Courier, monospace; fill: #25231f; font-size: 28px; font-weight: bold; }
+    .k { font-family: 'Courier New', Courier, monospace; fill: #b52d25; font-size: 30px; letter-spacing: 2px; }
+  </style>
+  <rect width="1600" height="900" fill="#f4f0e7"/>
+
+  <!-- title -->
+  <text class="h" x="60" y="88" font-size="60">The hermeneutic engine</text>
+  <text class="h" x="60" y="134" font-size="32" font-style="italic" fill="#666158">An instrument for reading agent cultures</text>
+  <line x1="60" y1="162" x2="1540" y2="162" stroke="#d7d0c3" stroke-width="2"/>
+
+  <!-- FACETS (left): the letter -->
+  <text class="k" x="60" y="222">facets</text>
+  <g transform="translate(60,250)">
+    <rect x="0" y="0" width="300" height="190" fill="#f4f0e7" stroke="#25231f" stroke-width="3"/>
+    <polyline points="0,0 150,95 300,0" fill="none" stroke="#25231f" stroke-width="3"/>
+    <rect x="34" y="118" width="232" height="48" fill="#f4f0e7" stroke="#d7d0c3" stroke-width="2"/>
+    <text class="l" x="150" y="152" text-anchor="middle" font-size="26">Foucauldian</text>
+  </g>
+  <g transform="translate(80,460)">
+    <rect x="34" y="0" width="232" height="48" fill="#f4f0e7" stroke="#d7d0c3" stroke-width="2"/>
+    <text class="l" x="150" y="34" text-anchor="middle" font-size="26">Lacanian</text>
+  </g>
+  <text class="d" x="60" y="560">A theory lens carries a</text>
+  <text class="d" x="60" y="594">framework to each reader</text>
+  <text class="d" x="60" y="628">inside a letter.</text>
+  <!-- letter arrives at Lenses -->
+  <path d="M362,345 C400,345 410,520 470,520" fill="none" stroke="#25231f" stroke-width="3"/>
+  <polygon points="470,520 456,512 456,528" fill="#25231f"/>
+
+  <!-- KERNEL (centre): the body -->
+  <rect x="470" y="196" width="680" height="560" fill="none" stroke="#25231f" stroke-width="4"/>
+  <text class="k" x="500" y="246">kernel</text>
+
+  <g>
+    <text class="l" x="500" y="304">Sources</text>
+    <text class="d" x="500" y="342">Immutable source bytes,</text>
+    <text class="d" x="500" y="376">stored by hash.</text>
+
+    <text class="l" x="830" y="304">Units + anchors</text>
+    <text class="d" x="830" y="342">Signed posts; exact</text>
+    <text class="d" x="830" y="376">ranges; checked</text>
+    <text class="d" x="830" y="410">quotations.</text>
+
+    <line x1="500" y1="440" x2="1120" y2="440" stroke="#d7d0c3" stroke-width="2"/>
+    <line x1="810" y1="276" x2="810" y2="600" stroke="#d7d0c3" stroke-width="2"/>
+
+    <text class="l" x="500" y="490">Lenses</text>
+    <text class="d" x="500" y="528">Reader, instructions,</text>
+    <text class="d" x="500" y="562">codebook, framing</text>
+    <text class="d" x="500" y="596">and priors.</text>
+
+    <text class="l" x="830" y="490">Verify</text>
+    <text class="d" x="830" y="528">Check anchors against</text>
+    <text class="d" x="830" y="562">sources, records</text>
+    <text class="d" x="830" y="596">against lenses.</text>
+  </g>
+
+  <!-- the ledger: the spine -->
+  <line x1="470" y1="640" x2="1150" y2="640" stroke="#b52d25" stroke-width="8"/>
+  <text class="l" x="500" y="688" fill="#b52d25">One append-only ledger</text>
+  <text class="d" x="500" y="726">Corrections add records; earlier records stay.</text>
+
+  <!-- MODULARITY (right): plugged in -->
+  <text class="k" x="1196" y="222">modularity</text>
+  <g stroke="#25231f" stroke-width="3">
+    <line x1="1150" y1="290" x2="1176" y2="290"/>
+    <line x1="1150" y1="410" x2="1176" y2="410"/>
+    <line x1="1150" y1="530" x2="1176" y2="530"/>
+    <line x1="1150" y1="650" x2="1176" y2="650"/>
+  </g>
+  <g fill="#25231f">
+    <rect x="1172" y="280" width="12" height="20"/>
+    <rect x="1172" y="400" width="12" height="20"/>
+    <rect x="1172" y="520" width="12" height="20"/>
+    <rect x="1172" y="640" width="12" height="20"/>
+  </g>
+
+  <text class="l" x="1196" y="300">Ways in</text>
+  <text class="d" x="1196" y="336">Wiki history; three routes</text>
+  <text class="d" x="1196" y="368">to model readers.</text>
+
+  <text class="l" x="1196" y="420">Ways of reading</text>
+  <text class="d" x="1196" y="456">Open coding, codebooks,</text>
+  <text class="d" x="1196" y="488">focused coding and field notes.</text>
+
+  <text class="l" x="1196" y="540">The readers’ board</text>
+  <text class="d" x="1196" y="576">Three rounds; notes, replies</text>
+  <text class="d" x="1196" y="608">and requested statements.</text>
+
+  <text class="l" x="1196" y="660">Theory lenses</text>
+  <text class="d" x="1196" y="696">Frameworks, exact passages,</text>
+  <text class="d" x="1196" y="728">counter-evidence and rivals.</text>
+
+  <!-- definition -->
+  <line x1="60" y1="774" x2="1540" y2="774" stroke="#d7d0c3" stroke-width="2"/>
+  <text class="d" x="60" y="814" fill="#25231f">A qualitative analysis tool with a kernel of textual coding and synthesis</text>
+  <text class="d" x="60" y="850" fill="#25231f">with modular add-ons for different methodologies and research questions.</text>
+</svg>
