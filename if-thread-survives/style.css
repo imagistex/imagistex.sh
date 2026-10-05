@@ -599,3 +599,66 @@ pre.exact { font-family: var(--typed); font-size: .7em; max-height: 30rem; overf
  .engine-demo .engine-path { grid-template-columns: 1fr }
  .page-trail { line-height: 1.8 }
 }
+
+/* Numbered moments and explicit references in the culture account. */
+.moment h3 { font-size: clamp(1.5rem, 1.1rem + 1vw, 2rem); font-weight: 700; max-width: 30em }
+.moment-number { color: var(--red); font-family: var(--typed); font-size: .75em }
+.moment-word { font-size: 1.1em; margin-block: .6rem }
+a.culture-reference { text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: .2em; text-decoration-thickness: 2px }
+
+/* Anchor-driven leaves: no script, and all passages print. */
+.hub-synthesis { max-width: var(--measure); margin-block: 3rem }
+.passage-gallery .gallery-leaf { padding-block: 1rem 2rem }
+@supports selector(:has(*)) {
+ .passage-gallery .gallery-leaf { display: none }
+ .passage-gallery .gallery-leaf:first-child { display: block }
+ .passage-gallery:has(.gallery-leaf:target) .gallery-leaf { display: none }
+ .passage-gallery:has(.gallery-leaf:target) .gallery-leaf:target { display: block }
+}
+.gallery-sentence { max-width: 27ch; margin: 1rem 0 2rem; font-size: clamp(2rem, 1.3rem + 3.2vw, 3.8rem); line-height: 1.24; letter-spacing: -.035em; white-space: pre-wrap }
+.gallery-leaf .again { margin-top: 2rem; font-family: var(--typed); font-size: .8em }
+.gallery-leaf h4 { font-weight: 700; font-size: 1.05em }
+@media print { .passage-gallery .gallery-leaf, .passage-gallery:has(.gallery-leaf:target) .gallery-leaf { display: block } }
+
+/* The board's table structure, in the notebook's existing palette. */
+.forum-index, .conversation { max-width: 62rem }
+.forum-table-scroll { overflow-x: auto; margin-block: 1.5rem }
+table.thread-index { width: 100%; min-width: 38rem; border-collapse: collapse; border: 1px solid var(--ink); margin: 0 }
+.thread-index th, .thread-index td { border: 1px solid var(--rule); padding: .8rem; vertical-align: top; text-align: left }
+.thread-index thead { background: var(--wash); font-family: var(--typed); font-size: .75em }
+.thread-index .forum-category th { border-top: 3px solid var(--red); color: var(--ink); font-size: 1.2em; padding-block: .9rem }
+.thread-index tbody tr:nth-child(even) { background: var(--wash) }
+.thread-index h4 { font-size: 1.05em; font-weight: 700; margin-bottom: .4rem }
+.topic-mark { color: var(--red) }
+.thread-index .thread-excerpt { font-size: .8em; margin-block: .5rem }
+.thread-index .thread-excerpt footer { font-size: .85em }
+.thread-index .reply-count { text-align: center; font-family: var(--typed) }
+.thread-readers, .last-post { font-size: .72em; min-width: 8rem; line-height: 1.8 }
+.forum-post { border: 0; padding: 0; margin: 0 0 .8rem }
+.post-table { width: 100%; table-layout: fixed; border-collapse: collapse; border: 1px solid var(--rule); background: var(--paper) }
+.forum-post:nth-of-type(even) .post-table { background: var(--wash) }
+.post-table td { vertical-align: top; padding: 1rem }
+.post-author { width: 22%; border-right: 1px solid var(--rule); background: var(--wash); overflow-wrap: anywhere }
+.post-author h4 { font-family: var(--typed); font-size: .9em; font-weight: 700; margin-top: .15rem }
+.post-author .post-meta { font-size: .72em; color: var(--ink) }
+.post-header { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--rule); padding: 0 0 .6rem; margin-bottom: 1rem; font-family: var(--typed); font-size: .7em }
+.post-content { overflow-wrap: anywhere }
+.forum-post .post-signature { font-size: .88em; margin-block: .6rem }
+.post-top { border-top: 1px solid var(--rule); padding-top: .6rem; margin-bottom: 0; font-family: var(--typed); font-size: .7em }
+.round-letter { padding: 0; background: transparent }
+.round-letter .researcher-post { border: 0 }
+.conversation-round > h3, #field-notes > h3 { background: var(--wash); border: 1px solid var(--rule); padding: .65rem .9rem; font-family: var(--typed); font-size: 1.1em }
+@media (max-width: 38rem) {
+ .post-author { width: 27% }
+ .post-table td { padding: .65rem }
+ .post-author h4 { font-size: .75em }
+ .post-author .post-meta { font-size: .6em }
+ .post-header { flex-wrap: wrap }
+}
+
+.researchers { max-width: var(--measure) }
+.researcher { border-top: 1px solid var(--rule); padding-top: 1rem; margin-top: 2rem }
+.researcher h3 { font-size: 1.55em; margin-bottom: .5rem }
+.researcher-model { font-family: var(--typed); font-size: .75em }
+.researcher blockquote { margin-inline: 0; border-left: 2px solid var(--red); padding-left: 1rem }
+.researchers-closing { border-top: 1px solid var(--rule); padding-top: 1.5rem; margin-top: 2.5rem }

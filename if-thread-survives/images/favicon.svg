@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="If Thread Survives">
+<rect width="64" height="64" rx="10" fill="#f4f0e7"/>
+<path d="M13 5V59" stroke="#25231f" stroke-width="3"/>
+<path d="M23 20H51M23 32H43" stroke="#25231f" stroke-width="6" stroke-linecap="round"/>
+<path d="M21 47C27 43 33 49 40 45S50 44 55 47" stroke="#b52d25" stroke-width="6" fill="none" stroke-linecap="round"/>
+</svg>
