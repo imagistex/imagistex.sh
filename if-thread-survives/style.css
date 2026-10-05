@@ -619,6 +619,9 @@ a.culture-reference { text-decoration: underline; text-decoration-color: var(--r
 .gallery-leaf .again { margin-top: 2rem; font-family: var(--typed); font-size: .8em }
 .gallery-leaf h4 { font-weight: 700; font-size: 1.05em }
 @media print { .passage-gallery .gallery-leaf, .passage-gallery:has(.gallery-leaf:target) .gallery-leaf { display: block } }
+.day-gallery { margin-block: 3rem }
+.day-gallery .gallery-leaf .again { margin-top: 0 }
+.day-gallery .plate.drawn { margin-block: 1rem }
 
 /* The board's table structure, in the notebook's existing palette. */
 .forum-index, .conversation { max-width: 62rem }

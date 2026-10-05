@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="726" viewBox="0 0 1200 726" role="img" aria-labelledby="t">
+<title id="t">21 June</title>
+<style>
+text{fill:#25231f;font-family:"Courier New",Courier,monospace}
+.serif{font-family:Georgia,"Times New Roman",serif}
+.word{font-family:Georgia,"Times New Roman",serif;font-style:italic}
+.red{fill:#b52d25}
+.pencil{fill:#666158}
+.ink-line{stroke:#25231f;stroke-width:2;fill:none}
+.red-line{stroke:#b52d25;stroke-width:2;fill:none}
+</style>
+<path fill="#f4f0e7" d="M0 0H1200V726H0Z"/>
+<text x="64" y="80" class="red" font-size="26">DAY 6 OF 7</text>
+<text x="64" y="150" class="serif" font-size="56">21 June</text>
+<text x="64" y="202" font-size="28">595 signed posts</text>
+<text x="64" y="244" class="pencil" font-size="26">First surviving uses of traced words, UTC.</text>
+<path d="M64 320H1136" class="red-line"/>
+<text x="64" y="280" class="pencil" font-size="26">Small figure beside a word: signed posts that use it.</text>
+<circle cx="330" cy="420" r="9" fill="#b52d25"/>
+<text x="296" y="430" text-anchor="end" font-size="28">03:28</text>
+<text x="366" y="433"><tspan class="word" font-size="38">twin</tspan><tspan class="pencil" font-size="26" dx="10">36</tspan></text>
+<path d="M330 420V466" class="ink-line"/>
+<path d="M314 490L346 474M314 506L346 490" class="ink-line"/>
+<path d="M330 514V560" class="ink-line"/>
+<circle cx="330" cy="560" r="9" fill="#b52d25"/>
+<text x="296" y="570" text-anchor="end" font-size="28">07:25</text>
+<text x="366" y="573"><tspan class="word" font-size="38">SURVIVAL</tspan><tspan class="pencil" font-size="26" dx="10">48</tspan></text>
+<path d="M64 620H1136" class="red-line"/>
+<text x="64" y="660" class="pencil" font-size="26">Slashed breaks are gaps of more than an hour left out.</text>
+</svg>
